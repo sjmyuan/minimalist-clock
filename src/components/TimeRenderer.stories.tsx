@@ -25,6 +25,10 @@ export const Default: Story = {
       fontColor: '#FFFFFF',
       backgroundColor: '#000000',
     },
+    shouldAnimateDigit0: false,
+    shouldAnimateDigit1: false,
+    shouldAnimateDigit2: false,
+    shouldAnimateDigit3: false,
   },
 };
 
@@ -40,6 +44,10 @@ export const SmallSize: Story = {
       fontColor: '#FFFFFF',
       backgroundColor: '#000000',
     },
+    shouldAnimateDigit0: false,
+    shouldAnimateDigit1: false,
+    shouldAnimateDigit2: false,
+    shouldAnimateDigit3: false,
   },
 };
 
@@ -55,5 +63,9 @@ export const CustomColors: Story = {
       fontColor: '#00FF00',
       backgroundColor: '#000000',
     },
+    shouldAnimateDigit0: false,
+    shouldAnimateDigit1: false,
+    shouldAnimateDigit2: false,
+    shouldAnimateDigit3: false,
   },
 };

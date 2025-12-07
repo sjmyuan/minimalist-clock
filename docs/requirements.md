@@ -46,7 +46,7 @@ The Minimalist Clock is a web-based application designed to provide users with a
 - **User Story 1.4**: As a [Tech-Savvy Decorator], I want the buttons to reappear when I move my mouse so that I can access controls when needed.
 
 #### Epic 2: Page-Flip Animation Effects
-- **User Story 2.1**: As a [Tech-Savvy Decorator], I want the hour and minute digits to update with a page-flip animation so that I can enjoy visual relaxation.
+- **User Story 2.1**: As a [Tech-Savvy Decorator], I want each individual digit (hour tens, hour ones, minute tens, minute ones) to update independently with page-flip animations so that I can enjoy visual relaxation.
 - **User Story 2.2**: As a [Tech-Savvy Decorator], I want the page-flip animation speed to be moderate so that it is neither too abrupt nor too sluggish.
 
 #### Epic 3: Customization Options
@@ -86,11 +86,16 @@ The Minimalist Clock is a web-based application designed to provide users with a
 ---
 
 #### **User Story 2.1**: Page-Flip Animation Effects
-- Given the current time is `XX:59`, When the time changes to `XX+1:00`, Then the time display should update with a page-flip animation.
+- Given the current time is `09:59`, When the time changes to `10:00`, Then all four digits should animate independently (hour tens: 0→1, hour ones: 9→0, minute tens: 5→0, minute ones: 9→0).
+- Given the current time is `10:09`, When the time changes to `10:10`, Then only the minute tens digit should animate (0→1) while the other three digits remain static.
+- Given the current time is `10:19`, When the time changes to `10:20`, Then only the minute tens digit should animate (1→2) while the other three digits remain static.
+- Given the current time is `10:29`, When the time changes to `10:30`, Then only the minute ones digit should animate (9→0) and the minute tens digit should animate (2→3), while hour digits remain static.
+- Given the current time is `23:59`, When the time changes to `00:00`, Then all four digits should animate independently.
+- Given any digit changes, When the page-flip animation executes, Then only the changed digit(s) should animate while unchanged digits remain static.
 - Given the animation is triggered, When the page-flip animation executes, Then the animation should use a 3D rotateX transformation from -90 degrees to 0 degrees.
 - Given the animation is triggered, When the page-flip animation executes, Then the animation should include an opacity transition from 0 to 1.
 - Given the animation is triggered, When the page-flip animation executes, Then the animation duration should be `750ms` (within the 500ms-1000ms range).
-- Given the user stays on the page, When each minute mark is reached, Then the page-flip animation should be triggered.
+- Given the user stays on the page, When each minute mark is reached, Then the page-flip animation should be triggered for only the digit(s) that changed.
 - Given the animation is not triggered, When only seconds change, Then no animation should occur.
 
 #### **User Story 2.2**: Moderate Animation Speed
