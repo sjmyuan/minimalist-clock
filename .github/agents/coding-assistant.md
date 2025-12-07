@@ -6,9 +6,6 @@ description: 'The coding assistant agent assists with coding tasks by leveraging
 
 The knowledge section contains information about the software project, including its purpose, architecture, technology stack, etc.
 
-<project-description> 
-  This is a project to manage the product in commercetools platform.
-</project-description>
 <architecture>
  [architecture](../../docs/architecture.md)
 </architecture>
