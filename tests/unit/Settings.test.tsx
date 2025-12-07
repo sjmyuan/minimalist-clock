@@ -10,6 +10,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
     fontColor: '#FFFFFF',
     backgroundColor: '#000000',
     showSeconds: false,
+    flipStyle: 'drop-down',
   };
 
   const mockOnPreferencesChange = jest.fn();
@@ -39,6 +40,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           fontColor: '#FFFFFF',
           backgroundColor: '#000000',
           showSeconds: false,
+          flipStyle: 'drop-down',
         });
       });
 
@@ -107,6 +109,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           fontColor: '#FFFFFF',
           backgroundColor: '#000000',
           showSeconds: false,
+          flipStyle: 'drop-down',
         });
       });
 
@@ -128,6 +131,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           fontColor: '#FFFFFF',
           backgroundColor: '#000000',
           showSeconds: false,
+          flipStyle: 'drop-down',
         });
       });
     });
@@ -139,6 +143,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           fontColor: '#FFFFFF',
           backgroundColor: '#000000',
           showSeconds: false,
+          flipStyle: 'drop-down',
         };
 
         render(
@@ -176,6 +181,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           fontColor: '#ff0000',
           backgroundColor: '#000000',
           showSeconds: false,
+          flipStyle: 'drop-down',
         });
       });
 
@@ -197,6 +203,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           fontColor: '#FFFFFF',
           backgroundColor: '#0000ff',
           showSeconds: false,
+          flipStyle: 'drop-down',
         });
       });
 
@@ -218,13 +225,14 @@ describe('Settings Component - Epic 3: Customization Options', () => {
       });
     });
 
-    describe('AC: Colors persist across page reloads', () => {
+    describe('AC: Font and background colors persist across page reloads', () => {
       it('should display the current font color value from preferences', () => {
         const customPreferences: UserPreferences = {
           fontSize: 120,
           fontColor: '#FF00FF',
           backgroundColor: '#000000',
           showSeconds: false,
+          flipStyle: 'drop-down',
         };
 
         render(
@@ -246,6 +254,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           fontColor: '#FFFFFF',
           backgroundColor: '#123456',
           showSeconds: false,
+          flipStyle: 'drop-down',
         };
 
         render(
@@ -388,6 +397,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           fontColor: '#FFFFFF',
           backgroundColor: '#000000',
           showSeconds: true,
+          flipStyle: 'drop-down',
         });
       });
 
@@ -415,6 +425,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           fontColor: '#FFFFFF',
           backgroundColor: '#000000',
           showSeconds: true,
+          flipStyle: 'drop-down',
         };
 
         render(
@@ -466,6 +477,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
         fontColor: '#FFFFFF',
         backgroundColor: '#000000',
         showSeconds: false,
+        flipStyle: 'drop-down',
       });
 
       // Change font color
@@ -477,9 +489,126 @@ describe('Settings Component - Epic 3: Customization Options', () => {
         fontColor: '#ff0000',
         backgroundColor: '#000000',
         showSeconds: false,
+        flipStyle: 'drop-down',
       });
 
       expect(mockOnPreferencesChange).toHaveBeenCalledTimes(2);
+    });
+  });
+
+  describe('User Story 3.4: Flip Style Selection', () => {
+    describe('AC: Flip style selector updates preference in real-time', () => {
+      it('should call onPreferencesChange when flip style is changed', () => {
+        const preferences: UserPreferences = {
+          ...defaultPreferences,
+          flipStyle: 'drop-down',
+        };
+
+        render(
+          <Settings
+            preferences={preferences}
+            onPreferencesChange={mockOnPreferencesChange}
+            isOpen={true}
+            onClose={mockOnClose}
+          />
+        );
+
+        const flipStyleSelect = screen.getByLabelText(/flip style/i);
+        fireEvent.change(flipStyleSelect, { target: { value: 'classic-flip' } });
+
+        expect(mockOnPreferencesChange).toHaveBeenCalledWith({
+          fontSize: 120,
+          fontColor: '#FFFFFF',
+          backgroundColor: '#000000',
+          showSeconds: false,
+          flipStyle: 'classic-flip',
+        });
+      });
+
+      it('should update immediately without debounce', () => {
+        const preferences: UserPreferences = {
+          ...defaultPreferences,
+          flipStyle: 'classic-flip',
+        };
+
+        render(
+          <Settings
+            preferences={preferences}
+            onPreferencesChange={mockOnPreferencesChange}
+            isOpen={true}
+            onClose={mockOnClose}
+          />
+        );
+
+        const flipStyleSelect = screen.getByLabelText(/flip style/i);
+        fireEvent.change(flipStyleSelect, { target: { value: 'drop-down' } });
+
+        expect(mockOnPreferencesChange).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    describe('AC: Flip style preference persists across page reloads', () => {
+      it('should display the current flipStyle value from preferences', () => {
+        const preferences: UserPreferences = {
+          ...defaultPreferences,
+          flipStyle: 'classic-flip',
+        };
+
+        render(
+          <Settings
+            preferences={preferences}
+            onPreferencesChange={mockOnPreferencesChange}
+            isOpen={true}
+            onClose={mockOnClose}
+          />
+        );
+
+        const flipStyleSelect = screen.getByLabelText(/flip style/i) as HTMLSelectElement;
+        expect(flipStyleSelect.value).toBe('classic-flip');
+      });
+
+      it('should default to drop-down when not specified', () => {
+        const preferences: UserPreferences = {
+          ...defaultPreferences,
+          flipStyle: 'drop-down',
+        };
+
+        render(
+          <Settings
+            preferences={preferences}
+            onPreferencesChange={mockOnPreferencesChange}
+            isOpen={true}
+            onClose={mockOnClose}
+          />
+        );
+
+        const flipStyleSelect = screen.getByLabelText(/flip style/i) as HTMLSelectElement;
+        expect(flipStyleSelect.value).toBe('drop-down');
+      });
+    });
+
+    describe('AC: Flip style selector has both options', () => {
+      it('should have both classic-flip and drop-down options', () => {
+        const preferences: UserPreferences = {
+          ...defaultPreferences,
+          flipStyle: 'drop-down',
+        };
+
+        render(
+          <Settings
+            preferences={preferences}
+            onPreferencesChange={mockOnPreferencesChange}
+            isOpen={true}
+            onClose={mockOnClose}
+          />
+        );
+
+        const classicFlipOption = screen.getByRole('option', { name: /classic flip/i });
+        const dropDownOption = screen.getByRole('option', { name: /drop down/i });
+
+        expect(classicFlipOption).toBeInTheDocument();
+        expect(dropDownOption).toBeInTheDocument();
+      });
     });
   });
 });

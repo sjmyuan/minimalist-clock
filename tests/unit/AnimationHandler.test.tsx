@@ -217,4 +217,97 @@ describe('AnimationHandler', () => {
       expect((gsap.fromTo as jest.Mock).mock.calls.length).toBe(1);
     });
   });
+
+  describe('User Story 3.4: Flip Style Selection', () => {
+    it('should use classic-flip animation style by default (for backward compatibility)', async () => {
+      const { rerender } = render(
+        <AnimationHandler trigger={false}>
+          <div>Test Content</div>
+        </AnimationHandler>
+      );
+
+      rerender(
+        <AnimationHandler trigger={true}>
+          <div>Test Content</div>
+        </AnimationHandler>
+      );
+
+      await waitFor(() => {
+        expect(gsap.fromTo).toHaveBeenCalledWith(
+          expect.any(Object),
+          expect.objectContaining({ rotateX: -90, opacity: 0 }),
+          expect.objectContaining({ rotateX: 0, opacity: 1 })
+        );
+      });
+    });
+
+    it('should use classic-flip animation when flipStyle is "classic-flip"', async () => {
+      const { rerender } = render(
+        <AnimationHandler trigger={false} flipStyle="classic-flip">
+          <div>Test Content</div>
+        </AnimationHandler>
+      );
+
+      rerender(
+        <AnimationHandler trigger={true} flipStyle="classic-flip">
+          <div>Test Content</div>
+        </AnimationHandler>
+      );
+
+      await waitFor(() => {
+        expect(gsap.fromTo).toHaveBeenCalledWith(
+          expect.any(Object),
+          expect.objectContaining({ rotateX: -90, opacity: 0 }),
+          expect.objectContaining({ rotateX: 0, opacity: 1 })
+        );
+      });
+    });
+
+    it('should use drop-down animation when flipStyle is "drop-down"', async () => {
+      const { rerender } = render(
+        <AnimationHandler trigger={false} flipStyle="drop-down">
+          <div>Test Content</div>
+        </AnimationHandler>
+      );
+
+      rerender(
+        <AnimationHandler trigger={true} flipStyle="drop-down">
+          <div>Test Content</div>
+        </AnimationHandler>
+      );
+
+      await waitFor(() => {
+        expect(gsap.fromTo).toHaveBeenCalledWith(
+          expect.any(Object),
+          expect.objectContaining({ y: '-50%', opacity: 0 }),
+          expect.objectContaining({ y: 0, opacity: 1 })
+        );
+      });
+    });
+
+    it('should apply 3D perspective effect for drop-down animation', async () => {
+      const { rerender } = render(
+        <AnimationHandler trigger={false} flipStyle="drop-down">
+          <div>Test Content</div>
+        </AnimationHandler>
+      );
+
+      rerender(
+        <AnimationHandler trigger={true} flipStyle="drop-down">
+          <div>Test Content</div>
+        </AnimationHandler>
+      );
+
+      await waitFor(() => {
+        expect(gsap.fromTo).toHaveBeenCalledWith(
+          expect.any(Object),
+          expect.objectContaining({ 
+            rotateX: expect.any(Number),
+            transformOrigin: expect.any(String)
+          }),
+          expect.any(Object)
+        );
+      });
+    });
+  });
 });

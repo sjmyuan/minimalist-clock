@@ -53,6 +53,7 @@ The Minimalist Clock is a web-based application designed to provide users with a
 - **User Story 3.1**: As a [Tech-Savvy Decorator], I want to adjust the font size so that it adapts to different screen sizes and personal preferences.
 - **User Story 3.2**: As a [Tech-Savvy Decorator], I want to change the font color and background color so that I can personalize my clock's appearance.
 - **User Story 3.3**: As a [Tech-Savvy Decorator], I want to toggle the display of seconds so that I can choose between a simpler HH:MM display or a more detailed HH:MM:SS display.
+- **User Story 3.4**: As a [Tech-Savvy Decorator], I want to select different flip animation styles so that I can choose the visual effect that best suits my preference.
 
 #### Epic 4: Responsive Design
 - **User Story 4.1**: As a [Tech-Savvy Decorator], I want the clock to display well on tablets and desktops so that I can use it on different devices.
@@ -122,6 +123,15 @@ The Minimalist Clock is a web-based application designed to provide users with a
 - Given the user enables the seconds display, When seconds are shown, Then two additional digits should appear after the minutes (HH:MM:SS format) with page-flip animations.
 - Given the user refreshes the page, When the page reloads, Then the seconds display preference should restore to the user's last saved value.
 - Given the user does not make any customizations, When the page first loads, Then the seconds display should be hidden by default (showing HH:MM format).
+
+#### **User Story 3.4**: Flip Animation Style Selection
+- Given the user opens the settings panel, When the user views the flip style selector, Then two options should be available: "Classic Flip" and "Drop Down".
+- Given the user selects the "Classic Flip" style, When a digit changes, Then the digit should animate with a full 3D rotateX flip from -90 degrees to 0 degrees.
+- Given the user selects the "Drop Down" style, When a digit changes, Then the upper half of the digit card should drop down with a 3D perspective effect.
+- Given the user changes the flip style, When the selection is made, Then the clock animation should update immediately to use the new style.
+- Given the user refreshes the page, When the page reloads, Then the flip style preference should restore to the user's last saved value.
+- Given the user does not make any customizations, When the page first loads, Then the flip style should default to "Drop Down".
+- Given any flip style is selected, When the animation executes, Then the animation duration should remain at 750ms with smooth easing.
 
 ---
 

@@ -135,6 +135,19 @@ export const Settings: React.FC<SettingsProps> = ({
           Show Seconds
         </Label>
       </SettingGroup>
+
+      <SettingGroup>
+        <Label htmlFor="flipStyle">Flip Style</Label>
+        <Input
+          as="select"
+          id="flipStyle"
+          value={preferences.flipStyle}
+          onChange={(e) => handleChange('flipStyle', e.target.value)}
+        >
+          <option value="drop-down">Drop Down</option>
+          <option value="classic-flip">Classic Flip</option>
+        </Input>
+      </SettingGroup>
     </SettingsOverlay>
   );
 };

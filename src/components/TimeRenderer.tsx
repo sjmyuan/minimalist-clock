@@ -127,12 +127,12 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
     <TimeContainer $preferences={preferences} $scaleFactor={scaleFactor}>
       <TimeDisplay data-testid="time-display">
         <DigitGroup>
-          <AnimationHandler trigger={shouldAnimateDigit0}>
+          <AnimationHandler trigger={shouldAnimateDigit0} flipStyle={preferences.flipStyle}>
             <DigitWrapper>
               <span>{hourString[0]}</span>
             </DigitWrapper>
           </AnimationHandler>
-          <AnimationHandler trigger={shouldAnimateDigit1}>
+          <AnimationHandler trigger={shouldAnimateDigit1} flipStyle={preferences.flipStyle}>
             <DigitWrapper>
               <span>{hourString[1]}</span>
             </DigitWrapper>
@@ -140,12 +140,12 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
         </DigitGroup>
         <span>:</span>
         <DigitGroup>
-          <AnimationHandler trigger={shouldAnimateDigit2}>
+          <AnimationHandler trigger={shouldAnimateDigit2} flipStyle={preferences.flipStyle}>
             <DigitWrapper>
               <span>{minuteString[0]}</span>
             </DigitWrapper>
           </AnimationHandler>
-          <AnimationHandler trigger={shouldAnimateDigit3}>
+          <AnimationHandler trigger={shouldAnimateDigit3} flipStyle={preferences.flipStyle}>
             <DigitWrapper>
               <span>{minuteString[1]}</span>
             </DigitWrapper>
@@ -155,12 +155,12 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
           <>
             <span>:</span>
             <DigitGroup>
-              <AnimationHandler trigger={shouldAnimateDigit4}>
+              <AnimationHandler trigger={shouldAnimateDigit4} flipStyle={preferences.flipStyle}>
                 <DigitWrapper>
                   <span>{secondString[0]}</span>
                 </DigitWrapper>
               </AnimationHandler>
-              <AnimationHandler trigger={shouldAnimateDigit5}>
+              <AnimationHandler trigger={shouldAnimateDigit5} flipStyle={preferences.flipStyle}>
                 <DigitWrapper>
                   <span>{secondString[1]}</span>
                 </DigitWrapper>

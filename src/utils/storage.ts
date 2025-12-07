@@ -7,6 +7,7 @@ const defaultPreferences: UserPreferences = {
   fontColor: '#FFFFFF',
   backgroundColor: '#000000',
   showSeconds: false,
+  flipStyle: 'drop-down',
 };
 
 /**

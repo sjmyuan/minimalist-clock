@@ -44,6 +44,7 @@ export default function Home() {
     fontColor: '#FFFFFF',
     backgroundColor: '#000000',
     showSeconds: false,
+    flipStyle: 'drop-down',
   });
   const [isSettingsOpen, setIsSettingsOpen] = React.useState(false);
   const { isFullscreen, toggleFullscreen } = useFullscreen();

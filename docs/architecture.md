@@ -152,9 +152,11 @@ The Minimalist Clock uses local storage for persisting user preferences. Below a
      "fontSize": 48,
      "fontColor": "#FFFFFF",
      "backgroundColor": "#000000",
-     "showSeconds": false
+     "showSeconds": false,
+     "flipStyle": "drop-down"
    }
    ```
+   - **flipStyle**: Animation style for digit transitions. Options: `"classic-flip"` (full 3D rotateX flip) or `"drop-down"` (upper half drops down with 3D perspective). Default: `"drop-down"`.
 2. **Time Object**:
    ```json
    {
@@ -201,7 +203,8 @@ The interface specification defines internal module-to-module communication.
       "fontSize": 48,
       "fontColor": "#FFFFFF",
       "backgroundColor": "#000000",
-      "showSeconds": false
+      "showSeconds": false,
+      "flipStyle": "drop-down"
     }
     ```
   - **Output**: None (updates the UI).
@@ -213,7 +216,8 @@ The interface specification defines internal module-to-module communication.
       "fontSize": 48,
       "fontColor": "#FFFFFF",
       "backgroundColor": "#000000",
-      "showSeconds": false
+      "showSeconds": false,
+      "flipStyle": "drop-down"
     }
     ```
   - **Output**: None (persists data).

@@ -13,6 +13,11 @@ export interface TimeObject {
 }
 
 /**
+ * Animation flip styles
+ */
+export type FlipStyle = 'classic-flip' | 'drop-down';
+
+/**
  * User preferences for clock customization
  */
 export interface UserPreferences {
@@ -20,6 +25,7 @@ export interface UserPreferences {
   fontColor: string;
   backgroundColor: string;
   showSeconds: boolean;
+  flipStyle: FlipStyle;
 }
 
 /**

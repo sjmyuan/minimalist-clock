@@ -15,6 +15,7 @@ describe('storage utils', () => {
         fontColor: '#FFFFFF',
         backgroundColor: '#000000',
         showSeconds: false,
+        flipStyle: 'drop-down',
       });
     });
   });
@@ -28,6 +29,7 @@ describe('storage utils', () => {
         fontColor: '#FFFFFF',
         backgroundColor: '#000000',
         showSeconds: false,
+        flipStyle: 'drop-down',
       });
     });
 
@@ -51,6 +53,8 @@ describe('storage utils', () => {
         fontSize: 100,
         fontColor: '#00FF00',
         backgroundColor: '#FFFFFF',
+        showSeconds: true,
+        flipStyle: 'classic-flip' as const,
       };
       
       savePreferences(prefs);
@@ -66,6 +70,8 @@ describe('storage utils', () => {
         fontSize: 80,
         fontColor: '#FF0000',
         backgroundColor: '#0000FF',
+        showSeconds: true,
+        flipStyle: 'classic-flip' as const,
       };
       
       savePreferences(customPrefs);
@@ -77,6 +83,7 @@ describe('storage utils', () => {
         fontColor: '#FFFFFF',
         backgroundColor: '#000000',
         showSeconds: false,
+        flipStyle: 'drop-down',
       });
       expect(localStorage.getItem('userPreferences')).toBeNull();
     });
