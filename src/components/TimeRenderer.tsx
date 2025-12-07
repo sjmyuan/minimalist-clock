@@ -39,7 +39,7 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({ time, preferences })
 
   return (
     <TimeContainer $preferences={preferences}>
-      <TimeDisplay>
+      <TimeDisplay data-testid="time-display">
         <span>{formatTime(time.hours)}</span>
         <span>:</span>
         <span>{formatTime(time.minutes)}</span>

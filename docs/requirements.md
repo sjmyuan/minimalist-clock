@@ -40,8 +40,10 @@ The Minimalist Clock is a web-based application designed to provide users with a
 ### **User Stories**
 
 #### Epic 1: Full-Screen Minimalist Clock
-- **User Story 1.1**: As a [Tech-Savvy Decorator], I want the clock to default to full-screen display so that I can have an immersive time-checking experience.
+- **User Story 1.1**: As a [Tech-Savvy Decorator], I want a Full-Screen button to enter full-screen mode so that I can have an immersive time-checking experience.
 - **User Story 1.2**: As a [Tech-Savvy Decorator], I want the option to exit full-screen mode so that I can use the clock flexibly in multitasking scenarios.
+- **User Story 1.3**: As a [Tech-Savvy Decorator], I want the Full-Screen and Settings buttons to hide automatically in full-screen mode so that I can enjoy an unobstructed view of the clock.
+- **User Story 1.4**: As a [Tech-Savvy Decorator], I want the buttons to reappear when I move my mouse so that I can access controls when needed.
 
 #### Epic 2: Page-Flip Animation Effects
 - **User Story 2.1**: As a [Tech-Savvy Decorator], I want the hour and minute digits to update with a page-flip animation so that I can enjoy visual relaxation.
@@ -58,14 +60,28 @@ The Minimalist Clock is a web-based application designed to provide users with a
 
 ### **Acceptance Criteria**
 
-#### **User Story 1.1**: Default Full-Screen Display
-- Given the page has finished loading, When the full-screen mode is automatically triggered, Then the page should display the clock in full-screen mode.
-- Given the user exits full-screen mode, When the user clicks the "Full-Screen" button, Then the page should re-enter full-screen mode.
-- A prominent "Full-Screen" button should be displayed at the top of the page, styled consistently with the overall design.
+#### **User Story 1.1**: Full-Screen Button to Enter Full-Screen Mode
+- Given the page has finished loading, When the user views the page, Then a prominent "Full-Screen" button should be displayed at the top-left of the page, styled consistently with the overall design.
+- Given the user is not in full-screen mode, When the user clicks the "Full-Screen" button, Then the page should enter full-screen mode.
+- Given the page is not in full-screen mode, When the page loads, Then the button should display "⛶ Full-Screen" text.
 
 #### **User Story 1.2**: Exit Full-Screen Mode
 - Given the user is in full-screen mode, When the user presses the `Esc` key or clicks the browser's exit full-screen button, Then the page should exit full-screen mode.
+- Given the user is in full-screen mode, When the user clicks the "Exit Full-Screen" button, Then the page should exit full-screen mode.
+- Given the user is in full-screen mode, When the page is displayed, Then the button should display "⬅ Exit Full-Screen" text.
 - Given the user exits full-screen mode, When the page reloads, Then the page should not automatically re-enter full-screen mode.
+
+#### **User Story 1.3**: Auto-Hide Buttons in Full-Screen Mode
+- Given the user is in full-screen mode, When 3 seconds pass without user interaction, Then the Full-Screen and Settings buttons should fade out and become hidden.
+- Given the user is not in full-screen mode, When the user views the page, Then the Full-Screen and Settings buttons should remain visible at all times.
+- Given the buttons are hidden in full-screen mode, When the buttons fade out, Then the transition should be smooth with a 300ms fade animation.
+
+#### **User Story 1.4**: Show Buttons on User Activity
+- Given the user is in full-screen mode with hidden buttons, When the user moves the mouse, Then the Full-Screen and Settings buttons should fade in and become visible.
+- Given the user is in full-screen mode with hidden buttons, When the user presses any keyboard key, Then the Full-Screen and Settings buttons should fade in and become visible.
+- Given the user is in full-screen mode with hidden buttons, When the user touches the screen (on touch devices), Then the Full-Screen and Settings buttons should fade in and become visible.
+- Given the buttons become visible after user activity, When the buttons fade in, Then the transition should be smooth with a 300ms fade animation.
+- Given the buttons are visible after user activity, When 3 seconds pass without further interaction, Then the buttons should fade out again.
 
 ---
 
