@@ -14,10 +14,11 @@ interface TimeRendererProps {
   shouldAnimateDigit3: boolean; // minute ones
   shouldAnimateDigit4: boolean; // second tens
   shouldAnimateDigit5: boolean; // second ones
+  scaleFactor?: number;
 }
 
-const TimeContainer = styled.div<{ $preferences: UserPreferences }>`
-  font-size: ${(props) => props.$preferences.fontSize}px;
+const TimeContainer = styled.div<{ $preferences: UserPreferences; $scaleFactor: number }>`
+  font-size: ${(props) => props.$preferences.fontSize * props.$scaleFactor}px;
   color: ${(props) => props.$preferences.fontColor};
   font-family: 'Courier New', monospace;
   font-weight: 300;
@@ -111,7 +112,8 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
   shouldAnimateDigit2,
   shouldAnimateDigit3,
   shouldAnimateDigit4,
-  shouldAnimateDigit5
+  shouldAnimateDigit5,
+  scaleFactor = 1.0
 }) => {
   const formatTime = (value: number): string => {
     return value.toString().padStart(2, '0');
@@ -122,7 +124,7 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
   const secondString = formatTime(time.seconds);
 
   return (
-    <TimeContainer $preferences={preferences}>
+    <TimeContainer $preferences={preferences} $scaleFactor={scaleFactor}>
       <TimeDisplay data-testid="time-display">
         <DigitGroup>
           <AnimationHandler trigger={shouldAnimateDigit0}>

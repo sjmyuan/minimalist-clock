@@ -29,7 +29,7 @@ System_Boundary(clock, "Minimalist Clock") {
     Container(clock_display, "Clock Display", "HTML/CSS/JavaScript", "Renders time and animations")
     Container(settings, "Settings", "JavaScript", "Handles user customizations")
     Container(time_sync, "Time Synchronization", "JavaScript", "Fetches system time")
-    Container(responsive, "Responsive Design", "CSS Media Queries", "Ensures layout adapts to screen sizes")
+    Container(responsive, "Responsive Design", "React Hook", "Detects viewport and scales layout dynamically")
     Container(animation, "Animation Engine", "JavaScript", "Manages page-flip animations")
 }
 
@@ -65,8 +65,8 @@ Container(time_sync, "Time Synchronization", "JavaScript", "Fetches system time"
     Component(time_fetcher, "Time Fetcher", "JavaScript", "Retrieves current system time")
 }
 
-Container(responsive, "Responsive Design", "CSS Media Queries", "Ensures layout adapts to screen sizes") {
-    Component(media_queries, "Media Queries", "CSS", "Applies responsive styles")
+Container(responsive, "Responsive Design", "React Hook", "Ensures layout adapts to screen sizes") {
+    Component(responsive_hook, "Responsive Layout Hook", "TypeScript", "Detects viewport size and calculates scale factor")
 }
 
 Container(animation, "Animation Engine", "JavaScript", "Manages page-flip animations") {
@@ -230,7 +230,41 @@ The interface specification defines internal module-to-module communication.
     }
     ```
 
-### **4.4 Animation Module**
+### **4.4 Responsive Design Module**
+The Responsive Design Module automatically adjusts the clock layout to fit different screen sizes and device types.
+
+- **Hook**: `useResponsiveLayout`
+  - **Returns**:
+    ```typescript
+    {
+      viewport: 'mobile' | 'tablet' | 'desktop',
+      scaleFactor: number
+    }
+    ```
+  - **Behavior**:
+    - Detects viewport size on mount using `window.innerWidth`
+    - Calculates appropriate scale factor based on viewport type:
+      - Mobile (<768px): 0.4 - 0.6 scale
+      - Tablet (768px-1024px): 0.75 - 1.0 scale
+      - Desktop (>1024px): 1.0 - 1.5 scale
+    - Listens to window resize events with 250ms debounce
+    - Updates layout dynamically when viewport changes
+    - Cleans up event listeners on unmount
+
+- **Integration with ClockDisplay and TimeRenderer**:
+  - ClockDisplay uses `useResponsiveLayout` hook to get current scale factor
+  - Scale factor is passed to TimeRenderer component
+  - TimeRenderer applies scale factor to base font size: `fontSize * scaleFactor`
+  - Ensures clock maximizes screen space on all devices
+  - Maintains aspect ratio and readability across viewports
+
+- **Performance Optimization**:
+  - Resize events debounced to prevent excessive re-renders
+  - Initial viewport detection uses SSR-safe approach
+  - Scale calculation uses efficient arithmetic operations
+  - Event listener cleanup prevents memory leaks
+
+### **4.5 Animation Module**
 The Animation Module implements page-flip animations for time digit transitions using GSAP.
 
 - **Component**: `AnimationHandler`

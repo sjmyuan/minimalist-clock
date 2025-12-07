@@ -4,6 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { TimeObject, UserPreferences } from '@/src/types';
 import { TimeRenderer } from './TimeRenderer';
+import { useResponsiveLayout } from '@/src/utils';
 
 interface ClockDisplayProps {
   preferences: UserPreferences;
@@ -20,6 +21,7 @@ const ClockContainer = styled.div<{ $backgroundColor: string }>`
 `;
 
 export const ClockDisplay: React.FC<ClockDisplayProps> = ({ preferences }) => {
+  const { scaleFactor } = useResponsiveLayout();
   const [time, setTime] = React.useState<TimeObject>({
     hours: 0,
     minutes: 0,
@@ -107,6 +109,7 @@ export const ClockDisplay: React.FC<ClockDisplayProps> = ({ preferences }) => {
         shouldAnimateDigit3={shouldAnimateDigit3}
         shouldAnimateDigit4={shouldAnimateDigit4}
         shouldAnimateDigit5={shouldAnimateDigit5}
+        scaleFactor={scaleFactor}
       />
     </ClockContainer>
   );
