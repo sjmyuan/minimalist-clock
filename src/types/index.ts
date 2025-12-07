@@ -8,6 +8,7 @@
 export interface TimeObject {
   hours: number;
   minutes: number;
+  seconds: number;
   date: string;
 }
 
@@ -18,6 +19,7 @@ export interface UserPreferences {
   fontSize: number;
   fontColor: string;
   backgroundColor: string;
+  showSeconds: boolean;
 }
 
 /**

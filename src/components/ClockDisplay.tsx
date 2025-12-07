@@ -23,12 +23,15 @@ export const ClockDisplay: React.FC<ClockDisplayProps> = ({ preferences }) => {
   const [time, setTime] = React.useState<TimeObject>({
     hours: 0,
     minutes: 0,
+    seconds: 0,
     date: '',
   });
   const [shouldAnimateDigit0, setShouldAnimateDigit0] = React.useState(false); // hour tens
   const [shouldAnimateDigit1, setShouldAnimateDigit1] = React.useState(false); // hour ones
   const [shouldAnimateDigit2, setShouldAnimateDigit2] = React.useState(false); // minute tens
   const [shouldAnimateDigit3, setShouldAnimateDigit3] = React.useState(false); // minute ones
+  const [shouldAnimateDigit4, setShouldAnimateDigit4] = React.useState(false); // second tens
+  const [shouldAnimateDigit5, setShouldAnimateDigit5] = React.useState(false); // second ones
 
   React.useEffect(() => {
     const updateTime = () => {
@@ -36,6 +39,7 @@ export const ClockDisplay: React.FC<ClockDisplayProps> = ({ preferences }) => {
       const newTime = {
         hours: now.getHours(),
         minutes: now.getMinutes(),
+        seconds: now.getSeconds(),
         date: now.toLocaleDateString('en-US', {
           weekday: 'long',
           year: 'numeric',
@@ -49,6 +53,8 @@ export const ClockDisplay: React.FC<ClockDisplayProps> = ({ preferences }) => {
       const newHourString = newTime.hours.toString().padStart(2, '0');
       const oldMinuteString = time.minutes.toString().padStart(2, '0');
       const newMinuteString = newTime.minutes.toString().padStart(2, '0');
+      const oldSecondString = time.seconds.toString().padStart(2, '0');
+      const newSecondString = newTime.seconds.toString().padStart(2, '0');
 
       // Check each digit independently
       if (oldHourString[0] !== newHourString[0]) {
@@ -71,6 +77,16 @@ export const ClockDisplay: React.FC<ClockDisplayProps> = ({ preferences }) => {
         setTimeout(() => setShouldAnimateDigit3(false), 100);
       }
 
+      if (oldSecondString[0] !== newSecondString[0]) {
+        setShouldAnimateDigit4(true);
+        setTimeout(() => setShouldAnimateDigit4(false), 100);
+      }
+
+      if (oldSecondString[1] !== newSecondString[1]) {
+        setShouldAnimateDigit5(true);
+        setTimeout(() => setShouldAnimateDigit5(false), 100);
+      }
+
       setTime(newTime);
     };
 
@@ -78,7 +94,7 @@ export const ClockDisplay: React.FC<ClockDisplayProps> = ({ preferences }) => {
     const interval = setInterval(updateTime, 1000);
 
     return () => clearInterval(interval);
-  }, [time.hours, time.minutes]);
+  }, [time.hours, time.minutes, time.seconds]);
 
   return (
     <ClockContainer $backgroundColor={preferences.backgroundColor}>
@@ -89,6 +105,8 @@ export const ClockDisplay: React.FC<ClockDisplayProps> = ({ preferences }) => {
         shouldAnimateDigit1={shouldAnimateDigit1}
         shouldAnimateDigit2={shouldAnimateDigit2}
         shouldAnimateDigit3={shouldAnimateDigit3}
+        shouldAnimateDigit4={shouldAnimateDigit4}
+        shouldAnimateDigit5={shouldAnimateDigit5}
       />
     </ClockContainer>
   );

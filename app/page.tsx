@@ -40,9 +40,10 @@ const ButtonContainer = styled.div<{ $visible: boolean }>`
 
 export default function Home() {
   const [preferences, setPreferences] = React.useState<UserPreferences>({
-    fontSize: 120,
+    fontSize: 48,
     fontColor: '#FFFFFF',
     backgroundColor: '#000000',
+    showSeconds: false,
   });
   const [isSettingsOpen, setIsSettingsOpen] = React.useState(false);
   const { isFullscreen, toggleFullscreen } = useFullscreen();

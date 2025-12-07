@@ -3,9 +3,10 @@ import { UserPreferences } from '@/src/types';
 const STORAGE_KEY = 'userPreferences';
 
 const defaultPreferences: UserPreferences = {
-  fontSize: 120,
+  fontSize: 48, // Default font size within the 12-100px range
   fontColor: '#FFFFFF',
   backgroundColor: '#000000',
+  showSeconds: false,
 };
 
 /**

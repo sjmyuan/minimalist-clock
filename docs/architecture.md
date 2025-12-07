@@ -151,7 +151,8 @@ The Minimalist Clock uses local storage for persisting user preferences. Below a
    {
      "fontSize": 48,
      "fontColor": "#FFFFFF",
-     "backgroundColor": "#000000"
+     "backgroundColor": "#000000",
+     "showSeconds": false
    }
    ```
 2. **Time Object**:
@@ -159,6 +160,7 @@ The Minimalist Clock uses local storage for persisting user preferences. Below a
    {
      "hours": 10,
      "minutes": 30,
+     "seconds": 45,
      "date": "2023-10-05"
    }
    ```
@@ -181,6 +183,7 @@ The interface specification defines internal module-to-module communication.
     {
       "hours": 10,
       "minutes": 30,
+      "seconds": 45,
       "date": "2023-10-05"
     }
     ```
@@ -197,7 +200,8 @@ The interface specification defines internal module-to-module communication.
     {
       "fontSize": 48,
       "fontColor": "#FFFFFF",
-      "backgroundColor": "#000000"
+      "backgroundColor": "#000000",
+      "showSeconds": false
     }
     ```
   - **Output**: None (updates the UI).
@@ -208,7 +212,8 @@ The interface specification defines internal module-to-module communication.
     {
       "fontSize": 48,
       "fontColor": "#FFFFFF",
-      "backgroundColor": "#000000"
+      "backgroundColor": "#000000",
+      "showSeconds": false
     }
     ```
   - **Output**: None (persists data).
@@ -220,6 +225,7 @@ The interface specification defines internal module-to-module communication.
     {
       "hours": 10,
       "minutes": 30,
+      "seconds": 45,
       "date": "2023-10-05"
     }
     ```
@@ -240,9 +246,10 @@ The Animation Module implements page-flip animations for time digit transitions 
 
 - **Integration with ClockDisplay**:
   - ClockDisplay monitors time changes every second
-  - When minute value changes, triggers animation by setting `shouldAnimate` to true
+  - When minute or second value changes, triggers animation by setting `shouldAnimate` to true
   - Animation trigger resets after 100ms to prepare for next animation
   - Animation duration: 750ms (meets User Story 2.2 requirement)
+  - Supports independent animation triggers for all 6 digits (HH:MM:SS) when seconds are enabled
 
 - **Performance Optimization**:
   - Animation only triggers on minute changes, not every second

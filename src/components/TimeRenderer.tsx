@@ -12,6 +12,8 @@ interface TimeRendererProps {
   shouldAnimateDigit1: boolean; // hour ones
   shouldAnimateDigit2: boolean; // minute tens
   shouldAnimateDigit3: boolean; // minute ones
+  shouldAnimateDigit4: boolean; // second tens
+  shouldAnimateDigit5: boolean; // second ones
 }
 
 const TimeContainer = styled.div<{ $preferences: UserPreferences }>`
@@ -107,7 +109,9 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
   shouldAnimateDigit0,
   shouldAnimateDigit1,
   shouldAnimateDigit2,
-  shouldAnimateDigit3
+  shouldAnimateDigit3,
+  shouldAnimateDigit4,
+  shouldAnimateDigit5
 }) => {
   const formatTime = (value: number): string => {
     return value.toString().padStart(2, '0');
@@ -115,6 +119,7 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
 
   const hourString = formatTime(time.hours);
   const minuteString = formatTime(time.minutes);
+  const secondString = formatTime(time.seconds);
 
   return (
     <TimeContainer $preferences={preferences}>
@@ -144,6 +149,23 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
             </DigitWrapper>
           </AnimationHandler>
         </DigitGroup>
+        {preferences.showSeconds && (
+          <>
+            <span>:</span>
+            <DigitGroup>
+              <AnimationHandler trigger={shouldAnimateDigit4}>
+                <DigitWrapper>
+                  <span>{secondString[0]}</span>
+                </DigitWrapper>
+              </AnimationHandler>
+              <AnimationHandler trigger={shouldAnimateDigit5}>
+                <DigitWrapper>
+                  <span>{secondString[1]}</span>
+                </DigitWrapper>
+              </AnimationHandler>
+            </DigitGroup>
+          </>
+        )}
       </TimeDisplay>
       <DateDisplay>{time.date}</DateDisplay>
     </TimeContainer>

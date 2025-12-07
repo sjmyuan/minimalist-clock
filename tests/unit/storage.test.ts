@@ -11,9 +11,10 @@ describe('storage utils', () => {
       const defaults = getDefaultPreferences();
       
       expect(defaults).toEqual({
-        fontSize: 120,
+        fontSize: 48,
         fontColor: '#FFFFFF',
         backgroundColor: '#000000',
+        showSeconds: false,
       });
     });
   });
@@ -23,9 +24,10 @@ describe('storage utils', () => {
       const prefs = loadPreferences();
       
       expect(prefs).toEqual({
-        fontSize: 120,
+        fontSize: 48,
         fontColor: '#FFFFFF',
         backgroundColor: '#000000',
+        showSeconds: false,
       });
     });
 
@@ -71,9 +73,10 @@ describe('storage utils', () => {
       const reset = resetPreferences();
       
       expect(reset).toEqual({
-        fontSize: 120,
+        fontSize: 48,
         fontColor: '#FFFFFF',
         backgroundColor: '#000000',
+        showSeconds: false,
       });
       expect(localStorage.getItem('userPreferences')).toBeNull();
     });

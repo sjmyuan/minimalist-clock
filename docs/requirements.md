@@ -52,6 +52,7 @@ The Minimalist Clock is a web-based application designed to provide users with a
 #### Epic 3: Customization Options
 - **User Story 3.1**: As a [Tech-Savvy Decorator], I want to adjust the font size so that it adapts to different screen sizes and personal preferences.
 - **User Story 3.2**: As a [Tech-Savvy Decorator], I want to change the font color and background color so that I can personalize my clock's appearance.
+- **User Story 3.3**: As a [Tech-Savvy Decorator], I want to toggle the display of seconds so that I can choose between a simpler HH:MM display or a more detailed HH:MM:SS display.
 
 #### Epic 4: Responsive Design
 - **User Story 4.1**: As a [Tech-Savvy Decorator], I want the clock to display well on tablets and desktops so that I can use it on different devices.
@@ -115,6 +116,12 @@ The Minimalist Clock is a web-based application designed to provide users with a
 - Given the user opens the settings panel, When the user selects a new font color or background color, Then the page should update the colors in real-time.
 - Given the user refreshes the page, When the page reloads, Then the font color and background color should restore to the user's last saved values.
 - Given the user does not make any customizations, When the page first loads, Then the default font color should be white, and the background color should be black.
+
+#### **User Story 3.3**: Toggle Show Seconds
+- Given the user opens the settings panel, When the user toggles the "Show Seconds" checkbox, Then the clock display should update in real-time to show or hide the seconds digits.
+- Given the user enables the seconds display, When seconds are shown, Then two additional digits should appear after the minutes (HH:MM:SS format) with page-flip animations.
+- Given the user refreshes the page, When the page reloads, Then the seconds display preference should restore to the user's last saved value.
+- Given the user does not make any customizations, When the page first loads, Then the seconds display should be hidden by default (showing HH:MM format).
 
 ---
 

@@ -17,9 +17,10 @@ jest.mock('@/src/components', () => ({
 
 jest.mock('@/src/utils', () => ({
   loadPreferences: jest.fn(() => ({
-    fontSize: 120,
+    fontSize: 48,
     fontColor: '#FFFFFF',
     backgroundColor: '#000000',
+    showSeconds: false,
   })),
   savePreferences: jest.fn(),
   useFullscreen: jest.fn(() => ({

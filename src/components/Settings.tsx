@@ -79,7 +79,7 @@ export const Settings: React.FC<SettingsProps> = ({
   isOpen,
   onClose,
 }) => {
-  const handleChange = (key: keyof UserPreferences, value: string | number) => {
+  const handleChange = (key: keyof UserPreferences, value: string | number | boolean) => {
     onPreferencesChange({
       ...preferences,
       [key]: value,
@@ -96,8 +96,8 @@ export const Settings: React.FC<SettingsProps> = ({
         <Input
           id="fontSize"
           type="number"
-          min="24"
-          max="200"
+          min="12"
+          max="100"
           value={preferences.fontSize}
           onChange={(e) => handleChange('fontSize', parseInt(e.target.value))}
         />
@@ -121,6 +121,19 @@ export const Settings: React.FC<SettingsProps> = ({
           value={preferences.backgroundColor}
           onChange={(e) => handleChange('backgroundColor', e.target.value)}
         />
+      </SettingGroup>
+
+      <SettingGroup>
+        <Label htmlFor="showSeconds">
+          <input
+            id="showSeconds"
+            type="checkbox"
+            checked={preferences.showSeconds}
+            onChange={(e) => handleChange('showSeconds', e.target.checked)}
+            style={{ marginRight: '0.5rem' }}
+          />
+          Show Seconds
+        </Label>
       </SettingGroup>
     </SettingsOverlay>
   );

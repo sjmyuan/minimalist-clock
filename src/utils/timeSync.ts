@@ -10,6 +10,7 @@ export const fetchCurrentTime = (): TimeObject => {
   return {
     hours: now.getHours(),
     minutes: now.getMinutes(),
+    seconds: now.getSeconds(),
     date: now.toLocaleDateString('en-US', {
       weekday: 'long',
       year: 'numeric',
