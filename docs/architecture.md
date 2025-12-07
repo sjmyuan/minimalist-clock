@@ -224,6 +224,31 @@ The interface specification defines internal module-to-module communication.
     }
     ```
 
+### **4.4 Animation Module**
+The Animation Module implements page-flip animations for time digit transitions using GSAP.
+
+- **Component**: `AnimationHandler`
+  - **Props**:
+    - `trigger` (boolean): When true, triggers the animation
+    - `duration` (number, optional): Animation duration in seconds (default: 0.75)
+    - `children` (ReactNode): Content to be animated
+  - **Behavior**:
+    - Applies 3D perspective transformation for realistic page-flip effect
+    - Uses rotateX transformation from -90° to 0° for flip animation
+    - Includes opacity transition for smooth appearance
+    - Easing function: `power2.out` for natural deceleration
+
+- **Integration with ClockDisplay**:
+  - ClockDisplay monitors time changes every second
+  - When minute value changes, triggers animation by setting `shouldAnimate` to true
+  - Animation trigger resets after 100ms to prepare for next animation
+  - Animation duration: 750ms (meets User Story 2.2 requirement)
+
+- **Performance Optimization**:
+  - Animation only triggers on minute changes, not every second
+  - Uses GSAP's hardware-accelerated transformations
+  - Minimal re-renders through controlled state updates
+
 ---
 
 ## **5. Deployment Architecture**

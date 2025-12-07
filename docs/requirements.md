@@ -86,13 +86,18 @@ The Minimalist Clock is a web-based application designed to provide users with a
 ---
 
 #### **User Story 2.1**: Page-Flip Animation Effects
-- Given the current time is `XX:59`, When the time changes to `XX+1:00`, Then the hour and minute digits should update with a page-flip animation.
-- Given the animation is triggered, When the page-flip animation executes, Then the animation duration should be between `500ms` and `1000ms`.
+- Given the current time is `XX:59`, When the time changes to `XX+1:00`, Then the time display should update with a page-flip animation.
+- Given the animation is triggered, When the page-flip animation executes, Then the animation should use a 3D rotateX transformation from -90 degrees to 0 degrees.
+- Given the animation is triggered, When the page-flip animation executes, Then the animation should include an opacity transition from 0 to 1.
+- Given the animation is triggered, When the page-flip animation executes, Then the animation duration should be `750ms` (within the 500ms-1000ms range).
 - Given the user stays on the page, When each minute mark is reached, Then the page-flip animation should be triggered.
+- Given the animation is not triggered, When only seconds change, Then no animation should occur.
 
 #### **User Story 2.2**: Moderate Animation Speed
 - Given the animation is triggered, When the page-flip animation executes, Then the animation speed should be set to `750ms`.
+- Given the animation is triggered, When the page-flip animation executes, Then the animation should use a smooth easing function (power2.out) for natural deceleration.
 - Given the user stays on the page, When the animation completes, Then the page should show no lag or delay.
+- Given the animation is triggered, When the animation resets, Then the reset should occur within 100ms to prepare for the next animation.
 
 ---
 

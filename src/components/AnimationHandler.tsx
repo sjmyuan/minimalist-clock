@@ -19,7 +19,7 @@ const AnimatedContainer = styled.div`
 export const AnimationHandler: React.FC<AnimationHandlerProps> = ({
   children,
   trigger,
-  duration = 0.6,
+  duration = 0.75,
 }) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
 

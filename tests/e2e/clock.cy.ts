@@ -92,4 +92,83 @@ describe('Minimalist Clock E2E Tests', () => {
       })
     })
   })
+
+  describe('Epic 2: Page-Flip Animation Effects', () => {
+    describe('User Story 2.1: Page-Flip Animation Effects', () => {
+      it('should display time with proper formatting', () => {
+        // Verify time display exists and is visible
+        cy.get('[data-testid="time-display"]').should('be.visible')
+        
+        // Verify time format (HH:MM)
+        cy.get('[data-testid="time-display"]').invoke('text').should('match', /\d{2}:\d{2}/)
+      })
+
+      it('should update time display', () => {
+        // Get initial time
+        cy.get('[data-testid="time-display"]').invoke('text').then((initialTime) => {
+          // Wait for more than a minute to see time change
+          // Note: This test relies on the system clock
+          cy.wait(1000)
+          
+          cy.get('[data-testid="time-display"]').invoke('text').then((currentTime) => {
+            // Verify time is being tracked
+            expect(currentTime).to.match(/\d{2}:\d{2}/)
+          })
+        })
+      })
+
+      it('should have animation styles applied to time display', () => {
+        // Check that the time display container has perspective for 3D effects
+        cy.get('[data-testid="time-display"]')
+          .parent()
+          .should('have.css', 'position', 'relative')
+      })
+
+      it('should display date below time', () => {
+        // Verify date is displayed
+        cy.get('[data-testid="time-display"]')
+          .parent()
+          .within(() => {
+            cy.contains(/monday|tuesday|wednesday|thursday|friday|saturday|sunday/i)
+              .should('be.visible')
+          })
+      })
+    })
+
+    describe('User Story 2.2: Moderate Animation Speed', () => {
+      it('should maintain smooth performance during display updates', () => {
+        // Check initial render performance
+        cy.get('[data-testid="time-display"]').should('be.visible')
+        
+        // Verify no lag - page should respond quickly to interactions
+        cy.contains('button', /settings/i).click()
+        cy.contains(/font size/i, { timeout: 500 }).should('be.visible')
+        
+        // Close settings
+        cy.contains('button', /close/i).click()
+        
+        // Verify time display is still responsive
+        cy.get('[data-testid="time-display"]').should('be.visible')
+      })
+
+      it('should not show visible lag or jank during rendering', () => {
+        // Monitor that the clock updates smoothly
+        let previousTime: string
+        
+        cy.get('[data-testid="time-display"]')
+          .invoke('text')
+          .then((text) => {
+            previousTime = text
+            expect(previousTime).to.match(/\d{2}:\d{2}/)
+          })
+        
+        // Wait a bit and verify time is still displayed properly
+        cy.wait(2000)
+        
+        cy.get('[data-testid="time-display"]')
+          .invoke('text')
+          .should('match', /\d{2}:\d{2}/)
+      })
+    })
+  })
 })

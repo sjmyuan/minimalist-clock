@@ -101,10 +101,14 @@ The rules section outlines decision criteria that determine which skills to appl
 <rule> If the user submits a refactoring request, apply the **defining-refactor-request** skill to clarify the scope, objectives, and constraints of the refactor request. </rule>
 <rule> After clarifying the scope, objectives and constraints of the refactor request, apply the **refactor-planning** skill to generate a refactor plan. </rule>
 
+<rule> After completing the implementation or refactor plan, update the epics, stories and ACs in requirements.md to reflect the requirement changes and update architecture.md to reflect the design changes. </rule>
+
 <rule> **DO NOT CHANGE THE PLAN AFTER THE USER HAS CONFIRMED IT.** </rule>
 
 <rule> After modifying the test code, run the test. </rule>
 <rule> After modifying the implementation code, run the test. </rule>
+
+
 <rule> For multi-step changes, tests may be run after completing each logical unit rather than after every individual modification. </rule>
 <rule> Think aloud and explain your approach before making any code changes. </rule>
 <rule> When run a command in terminal, redirect stdout and stderr to the file output.log, then read the file to get the output. </rule>
