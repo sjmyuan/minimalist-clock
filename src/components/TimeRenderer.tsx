@@ -72,7 +72,7 @@ const DigitWrapper = styled.div`
       transparent 100%
     );
     transform: translateY(-50%);
-    z-index: 1;
+    z-index: 2;
   }
   
   &::before {
@@ -89,12 +89,12 @@ const DigitWrapper = styled.div`
       transparent 100%
     );
     transform: translateY(calc(-50% + 1px));
-    z-index: 1;
+    z-index: 2;
   }
   
   span {
     position: relative;
-    z-index: 2;
+    z-index: 1;
   }
 `;
 
