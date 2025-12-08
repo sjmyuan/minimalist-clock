@@ -40,7 +40,7 @@ const TimeDisplay = styled.div`
 
 const DigitGroup = styled.div`
   display: flex;
-  gap: 0.1rem;
+  gap: 0.3rem;
 `;
 
 const DigitWrapper = styled.div`

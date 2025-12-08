@@ -7,7 +7,8 @@ description: 'The coding assistant agent assists with coding tasks by leveraging
 The knowledge section contains information about the software project, including its purpose, architecture, technology stack, etc.
 
 <architecture>
- [architecture](../../docs/architecture.md)
+ - [architecture](../../docs/architecture.md)
+ - use jest for javascript/typescript testing
 </architecture>
 
 <coding-guidelines>
