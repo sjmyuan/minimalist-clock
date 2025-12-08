@@ -47,6 +47,23 @@ export const AnimationHandler: React.FC<AnimationHandlerProps> = ({
             transformOrigin: 'center top'
           }
         );
+      } else if (flipStyle === 'card-fold') {
+        // Card fold animation: vertical fold from top edge downward
+        gsap.fromTo(
+          containerRef.current,
+          { 
+            rotateX: -180, 
+            opacity: 0,
+            transformOrigin: 'center top'
+          },
+          { 
+            rotateX: 0, 
+            opacity: 1, 
+            duration, 
+            ease: 'power2.out',
+            transformOrigin: 'center top'
+          }
+        );
       } else {
         // Classic flip animation: full 3D rotateX flip
         gsap.fromTo(

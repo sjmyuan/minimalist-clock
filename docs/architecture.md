@@ -156,7 +156,7 @@ The Minimalist Clock uses local storage for persisting user preferences. Below a
      "flipStyle": "drop-down"
    }
    ```
-   - **flipStyle**: Animation style for digit transitions. Options: `"classic-flip"` (full 3D rotateX flip) or `"drop-down"` (upper half drops down with 3D perspective). Default: `"drop-down"`.
+   - **flipStyle**: Animation style for digit transitions. Options: `"classic-flip"` (full 3D rotateX flip from -90 to 0 degrees), `"drop-down"` (upper half drops down with 3D perspective), or `"card-fold"` (vertical fold from top edge downward using rotateX from -180 to 0 degrees). Default: `"drop-down"`.
 2. **Time Object**:
    ```json
    {

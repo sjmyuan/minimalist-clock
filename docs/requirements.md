@@ -125,13 +125,15 @@ The Minimalist Clock is a web-based application designed to provide users with a
 - Given the user does not make any customizations, When the page first loads, Then the seconds display should be hidden by default (showing HH:MM format).
 
 #### **User Story 3.4**: Flip Animation Style Selection
-- Given the user opens the settings panel, When the user views the flip style selector, Then two options should be available: "Classic Flip" and "Drop Down".
+- Given the user opens the settings panel, When the user views the flip style selector, Then three options should be available: "Classic Flip", "Drop Down", and "Card Fold".
 - Given the user selects the "Classic Flip" style, When a digit changes, Then the digit should animate with a full 3D rotateX flip from -90 degrees to 0 degrees.
 - Given the user selects the "Drop Down" style, When a digit changes, Then the upper half of the digit card should drop down with a 3D perspective effect.
+- Given the user selects the "Card Fold" style, When a digit changes, Then the digit should animate with a vertical fold from the top edge downward using a 3D rotateX transformation from -180 degrees to 0 degrees.
+- Given the "Card Fold" style is selected, When the animation executes, Then the transform origin should be set to "center top" to create the folding effect from the top edge.
 - Given the user changes the flip style, When the selection is made, Then the clock animation should update immediately to use the new style.
 - Given the user refreshes the page, When the page reloads, Then the flip style preference should restore to the user's last saved value.
 - Given the user does not make any customizations, When the page first loads, Then the flip style should default to "Drop Down".
-- Given any flip style is selected, When the animation executes, Then the animation duration should remain at 750ms with smooth easing.
+- Given any flip style is selected, When the animation executes, Then the animation duration should remain at 750ms with smooth easing (power2.out).
 
 ---
 

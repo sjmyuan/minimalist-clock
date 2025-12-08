@@ -587,8 +587,8 @@ describe('Settings Component - Epic 3: Customization Options', () => {
       });
     });
 
-    describe('AC: Flip style selector has both options', () => {
-      it('should have both classic-flip and drop-down options', () => {
+    describe('AC: Flip style selector has all three options', () => {
+      it('should have classic-flip, drop-down, and card-fold options', () => {
         const preferences: UserPreferences = {
           ...defaultPreferences,
           flipStyle: 'drop-down',
@@ -605,9 +605,54 @@ describe('Settings Component - Epic 3: Customization Options', () => {
 
         const classicFlipOption = screen.getByRole('option', { name: /classic flip/i });
         const dropDownOption = screen.getByRole('option', { name: /drop down/i });
+        const cardFoldOption = screen.getByRole('option', { name: /card fold/i });
 
         expect(classicFlipOption).toBeInTheDocument();
         expect(dropDownOption).toBeInTheDocument();
+        expect(cardFoldOption).toBeInTheDocument();
+      });
+    });
+
+    describe('AC: Card fold style can be selected and persisted', () => {
+      it('should call onPreferencesChange when card-fold is selected', () => {
+        render(
+          <Settings
+            preferences={defaultPreferences}
+            onPreferencesChange={mockOnPreferencesChange}
+            isOpen={true}
+            onClose={mockOnClose}
+          />
+        );
+
+        const flipStyleSelect = screen.getByLabelText(/flip style/i);
+        fireEvent.change(flipStyleSelect, { target: { value: 'card-fold' } });
+
+        expect(mockOnPreferencesChange).toHaveBeenCalledWith({
+          fontSize: 120,
+          fontColor: '#FFFFFF',
+          backgroundColor: '#000000',
+          showSeconds: false,
+          flipStyle: 'card-fold',
+        });
+      });
+
+      it('should display card-fold when set in preferences', () => {
+        const preferences: UserPreferences = {
+          ...defaultPreferences,
+          flipStyle: 'card-fold',
+        };
+
+        render(
+          <Settings
+            preferences={preferences}
+            onPreferencesChange={mockOnPreferencesChange}
+            isOpen={true}
+            onClose={mockOnClose}
+          />
+        );
+
+        const flipStyleSelect = screen.getByLabelText(/flip style/i) as HTMLSelectElement;
+        expect(flipStyleSelect.value).toBe('card-fold');
       });
     });
   });

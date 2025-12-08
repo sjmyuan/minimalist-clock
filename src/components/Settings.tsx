@@ -146,6 +146,7 @@ export const Settings: React.FC<SettingsProps> = ({
         >
           <option value="drop-down">Drop Down</option>
           <option value="classic-flip">Classic Flip</option>
+          <option value="card-fold">Card Fold</option>
         </Input>
       </SettingGroup>
     </SettingsOverlay>

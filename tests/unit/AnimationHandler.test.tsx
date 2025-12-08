@@ -309,5 +309,78 @@ describe('AnimationHandler', () => {
         );
       });
     });
+
+    it('should use card-fold animation when flipStyle is "card-fold"', async () => {
+      const { rerender } = render(
+        <AnimationHandler trigger={false} flipStyle="card-fold">
+          <div>Test Content</div>
+        </AnimationHandler>
+      );
+
+      rerender(
+        <AnimationHandler trigger={true} flipStyle="card-fold">
+          <div>Test Content</div>
+        </AnimationHandler>
+      );
+
+      await waitFor(() => {
+        expect(gsap.fromTo).toHaveBeenCalledWith(
+          expect.any(Object),
+          expect.objectContaining({ rotateX: -180, opacity: 0 }),
+          expect.objectContaining({ rotateX: 0, opacity: 1 })
+        );
+      });
+    });
+
+    it('should apply transform origin to top edge for card-fold animation', async () => {
+      const { rerender } = render(
+        <AnimationHandler trigger={false} flipStyle="card-fold">
+          <div>Test Content</div>
+        </AnimationHandler>
+      );
+
+      rerender(
+        <AnimationHandler trigger={true} flipStyle="card-fold">
+          <div>Test Content</div>
+        </AnimationHandler>
+      );
+
+      await waitFor(() => {
+        expect(gsap.fromTo).toHaveBeenCalledWith(
+          expect.any(Object),
+          expect.objectContaining({ 
+            transformOrigin: 'center top'
+          }),
+          expect.objectContaining({ 
+            transformOrigin: 'center top'
+          })
+        );
+      });
+    });
+
+    it('should use same duration and easing for card-fold as other styles', async () => {
+      const { rerender } = render(
+        <AnimationHandler trigger={false} flipStyle="card-fold">
+          <div>Test Content</div>
+        </AnimationHandler>
+      );
+
+      rerender(
+        <AnimationHandler trigger={true} flipStyle="card-fold">
+          <div>Test Content</div>
+        </AnimationHandler>
+      );
+
+      await waitFor(() => {
+        expect(gsap.fromTo).toHaveBeenCalledWith(
+          expect.any(Object),
+          expect.any(Object),
+          expect.objectContaining({ 
+            duration: 0.75,
+            ease: 'power2.out'
+          })
+        );
+      });
+    });
   });
 });

@@ -15,7 +15,7 @@ export interface TimeObject {
 /**
  * Animation flip styles
  */
-export type FlipStyle = 'classic-flip' | 'drop-down';
+export type FlipStyle = 'classic-flip' | 'drop-down' | 'card-fold';
 
 /**
  * User preferences for clock customization
