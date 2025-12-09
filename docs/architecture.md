@@ -156,7 +156,11 @@ The Minimalist Clock uses local storage for persisting user preferences. Below a
      "flipStyle": "drop-down"
    }
    ```
-   - **flipStyle**: Animation style for digit transitions. Options: `"classic-flip"` (full 3D rotateX flip from -90 to 0 degrees), `"drop-down"` (upper half drops down with 3D perspective), or `"card-fold"` (vertical fold from top edge downward using rotateX from -180 to 0 degrees). Default: `"drop-down"`.
+   - **flipStyle**: Animation style for digit transitions. Options: 
+     - `"classic-flip"`: Full 3D rotateX flip from -90 to 0 degrees
+     - `"drop-down"`: Upper half drops down with 3D perspective
+     - `"card-fold"`: Physical flip clock with two-phase animation (old digit top half rotates down -90° to 0° over 375ms, then new digit bottom half rotates up 0° to 90° over 375ms, mimicking mechanical flip clock mechanism)
+     - Default: `"drop-down"`.
 2. **Time Object**:
    ```json
    {
@@ -275,12 +279,36 @@ The Animation Module implements page-flip animations for time digit transitions 
   - **Props**:
     - `trigger` (boolean): When true, triggers the animation
     - `duration` (number, optional): Animation duration in seconds (default: 0.75)
+    - `flipStyle` (string): Animation style - `"classic-flip"`, `"drop-down"`, or `"card-fold"`
+    - `oldDigit` (string, optional): Previous digit value (for card-fold style)
+    - `newDigit` (string, optional): New digit value (for card-fold style)
     - `children` (ReactNode): Content to be animated
   - **Behavior**:
-    - Applies 3D perspective transformation for realistic page-flip effect
-    - Uses rotateX transformation from -90° to 0° for flip animation
-    - Includes opacity transition for smooth appearance
+    - **Classic Flip**: Full 3D rotateX flip from -90° to 0° with opacity transition
+    - **Drop Down**: Upper half drops down with 3D perspective effect
+    - **Card Fold** (Physical Flip Clock):
+      - Uses split digit card structure with three layers:
+        - **StaticCard (upper)**: Shows bottom half of old digit (clip-path: inset(0 0 50% 0))
+        - **StaticCard (bottom)**: Shows top half of new digit (clip-path: inset(50% 0 0 0))
+        - **OverlayCard**: Animating top half of old digit transitioning to bottom half of new digit
+      - Two-phase animation timeline using GSAP:
+        - **Phase 1 (0-375ms)**: OverlayCard rotates from -90° to 0° (showing old digit top half)
+        - **Midpoint transition**: Content switches from old digit to new digit at 375ms
+        - **Phase 2 (375-750ms)**: OverlayCard continues rotation from 0° to 90° (showing new digit bottom half)
+      - Transform origin: `center bottom` for Phase 1, `center top` for Phase 2
+      - Total duration: 750ms with `power2.out` easing per phase
     - Easing function: `power2.out` for natural deceleration
+
+- **Component**: `TimeRenderer`
+  - **Digit Tracking**:
+    - Uses `useRef` hooks to track previous digit values:
+      - `prevHourStringRef`, `prevMinuteStringRef`, `prevSecondStringRef`
+    - Updates refs in `useEffect` after each render with current values
+    - For card-fold style, passes both `oldDigit` and `newDigit` props to AnimationHandler
+  - **Integration with AnimationHandler**:
+    - Renders 6 independent AnimationHandler instances (HH:MM:SS when seconds enabled)
+    - Each digit animates independently when its value changes
+    - Determines when to pass digit props: `shouldPassDigits = preferences.flipStyle === 'card-fold'`
 
 - **Integration with ClockDisplay**:
   - ClockDisplay monitors time changes every second
@@ -290,9 +318,10 @@ The Animation Module implements page-flip animations for time digit transitions 
   - Supports independent animation triggers for all 6 digits (HH:MM:SS) when seconds are enabled
 
 - **Performance Optimization**:
-  - Animation only triggers on minute changes, not every second
+  - Animation only triggers on digit value changes
   - Uses GSAP's hardware-accelerated transformations
   - Minimal re-renders through controlled state updates
+  - Split card structure uses CSS clip-path for efficient rendering
 
 ---
 

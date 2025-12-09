@@ -128,12 +128,16 @@ The Minimalist Clock is a web-based application designed to provide users with a
 - Given the user opens the settings panel, When the user views the flip style selector, Then three options should be available: "Classic Flip", "Drop Down", and "Card Fold".
 - Given the user selects the "Classic Flip" style, When a digit changes, Then the digit should animate with a full 3D rotateX flip from -90 degrees to 0 degrees.
 - Given the user selects the "Drop Down" style, When a digit changes, Then the upper half of the digit card should drop down with a 3D perspective effect.
-- Given the user selects the "Card Fold" style, When a digit changes, Then the digit should animate with a vertical fold from the top edge downward using a 3D rotateX transformation from -180 degrees to 0 degrees.
-- Given the "Card Fold" style is selected, When the animation executes, Then the transform origin should be set to "center top" to create the folding effect from the top edge.
+- Given the user selects the "Card Fold" style, When a digit changes, Then the digit should animate with a physical flip clock mechanism using a two-phase animation:
+  - Phase 1 (0-375ms): The top half of the old digit rotates downward from -90° to 0° around its bottom edge
+  - Phase 2 (375-750ms): The bottom half of the new digit rotates upward from 0° to 90° around its top edge
+  - The digit content switches from old to new at the 375ms midpoint
+  - Three card layers are rendered: static upper half (old digit bottom), static bottom half (new digit top), and animated overlay (transitioning half)
+- Given the "Card Fold" style is selected, When the animation executes, Then the transform origin should be "center bottom" for Phase 1 and "center top" for Phase 2 to create the mechanical flip effect.
 - Given the user changes the flip style, When the selection is made, Then the clock animation should update immediately to use the new style.
 - Given the user refreshes the page, When the page reloads, Then the flip style preference should restore to the user's last saved value.
 - Given the user does not make any customizations, When the page first loads, Then the flip style should default to "Drop Down".
-- Given any flip style is selected, When the animation executes, Then the animation duration should remain at 750ms with smooth easing (power2.out).
+- Given any flip style is selected, When the animation executes, Then the animation duration should remain at 750ms with smooth easing (power2.out) applied to each phase.
 
 ---
 

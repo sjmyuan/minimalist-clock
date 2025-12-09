@@ -123,16 +123,41 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
   const minuteString = formatTime(time.minutes);
   const secondString = formatTime(time.seconds);
 
+  // Track previous digit values for physical flip clock animation
+  const prevHourStringRef = React.useRef(hourString);
+  const prevMinuteStringRef = React.useRef(minuteString);
+  const prevSecondStringRef = React.useRef(secondString);
+
+  // Store current values as previous for next render
+  React.useEffect(() => {
+    prevHourStringRef.current = hourString;
+    prevMinuteStringRef.current = minuteString;
+    prevSecondStringRef.current = secondString;
+  });
+
+  // Determine if we should pass digit props (only for card-fold style)
+  const shouldPassDigits = preferences.flipStyle === 'card-fold';
+
   return (
     <TimeContainer $preferences={preferences} $scaleFactor={scaleFactor}>
       <TimeDisplay data-testid="time-display">
         <DigitGroup>
-          <AnimationHandler trigger={shouldAnimateDigit0} flipStyle={preferences.flipStyle}>
+          <AnimationHandler 
+            trigger={shouldAnimateDigit0} 
+            flipStyle={preferences.flipStyle}
+            oldDigit={shouldPassDigits ? prevHourStringRef.current[0] : undefined}
+            newDigit={shouldPassDigits ? hourString[0] : undefined}
+          >
             <DigitWrapper>
               <span>{hourString[0]}</span>
             </DigitWrapper>
           </AnimationHandler>
-          <AnimationHandler trigger={shouldAnimateDigit1} flipStyle={preferences.flipStyle}>
+          <AnimationHandler 
+            trigger={shouldAnimateDigit1} 
+            flipStyle={preferences.flipStyle}
+            oldDigit={shouldPassDigits ? prevHourStringRef.current[1] : undefined}
+            newDigit={shouldPassDigits ? hourString[1] : undefined}
+          >
             <DigitWrapper>
               <span>{hourString[1]}</span>
             </DigitWrapper>
@@ -140,12 +165,22 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
         </DigitGroup>
         <span>:</span>
         <DigitGroup>
-          <AnimationHandler trigger={shouldAnimateDigit2} flipStyle={preferences.flipStyle}>
+          <AnimationHandler 
+            trigger={shouldAnimateDigit2} 
+            flipStyle={preferences.flipStyle}
+            oldDigit={shouldPassDigits ? prevMinuteStringRef.current[0] : undefined}
+            newDigit={shouldPassDigits ? minuteString[0] : undefined}
+          >
             <DigitWrapper>
               <span>{minuteString[0]}</span>
             </DigitWrapper>
           </AnimationHandler>
-          <AnimationHandler trigger={shouldAnimateDigit3} flipStyle={preferences.flipStyle}>
+          <AnimationHandler 
+            trigger={shouldAnimateDigit3} 
+            flipStyle={preferences.flipStyle}
+            oldDigit={shouldPassDigits ? prevMinuteStringRef.current[1] : undefined}
+            newDigit={shouldPassDigits ? minuteString[1] : undefined}
+          >
             <DigitWrapper>
               <span>{minuteString[1]}</span>
             </DigitWrapper>
@@ -155,12 +190,22 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
           <>
             <span>:</span>
             <DigitGroup>
-              <AnimationHandler trigger={shouldAnimateDigit4} flipStyle={preferences.flipStyle}>
+              <AnimationHandler 
+                trigger={shouldAnimateDigit4} 
+                flipStyle={preferences.flipStyle}
+                oldDigit={shouldPassDigits ? prevSecondStringRef.current[0] : undefined}
+                newDigit={shouldPassDigits ? secondString[0] : undefined}
+              >
                 <DigitWrapper>
                   <span>{secondString[0]}</span>
                 </DigitWrapper>
               </AnimationHandler>
-              <AnimationHandler trigger={shouldAnimateDigit5} flipStyle={preferences.flipStyle}>
+              <AnimationHandler 
+                trigger={shouldAnimateDigit5} 
+                flipStyle={preferences.flipStyle}
+                oldDigit={shouldPassDigits ? prevSecondStringRef.current[1] : undefined}
+                newDigit={shouldPassDigits ? secondString[1] : undefined}
+              >
                 <DigitWrapper>
                   <span>{secondString[1]}</span>
                 </DigitWrapper>
