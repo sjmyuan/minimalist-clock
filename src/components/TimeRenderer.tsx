@@ -147,6 +147,7 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
             flipStyle={preferences.flipStyle}
             oldDigit={shouldPassDigits ? prevHourStringRef.current[0] : undefined}
             newDigit={shouldPassDigits ? hourString[0] : undefined}
+            backgroundColor={preferences.backgroundColor}
           >
             <DigitWrapper>
               <span>{hourString[0]}</span>
@@ -157,6 +158,7 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
             flipStyle={preferences.flipStyle}
             oldDigit={shouldPassDigits ? prevHourStringRef.current[1] : undefined}
             newDigit={shouldPassDigits ? hourString[1] : undefined}
+            backgroundColor={preferences.backgroundColor}
           >
             <DigitWrapper>
               <span>{hourString[1]}</span>
@@ -170,6 +172,7 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
             flipStyle={preferences.flipStyle}
             oldDigit={shouldPassDigits ? prevMinuteStringRef.current[0] : undefined}
             newDigit={shouldPassDigits ? minuteString[0] : undefined}
+            backgroundColor={preferences.backgroundColor}
           >
             <DigitWrapper>
               <span>{minuteString[0]}</span>
@@ -180,6 +183,7 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
             flipStyle={preferences.flipStyle}
             oldDigit={shouldPassDigits ? prevMinuteStringRef.current[1] : undefined}
             newDigit={shouldPassDigits ? minuteString[1] : undefined}
+            backgroundColor={preferences.backgroundColor}
           >
             <DigitWrapper>
               <span>{minuteString[1]}</span>
@@ -195,6 +199,7 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
                 flipStyle={preferences.flipStyle}
                 oldDigit={shouldPassDigits ? prevSecondStringRef.current[0] : undefined}
                 newDigit={shouldPassDigits ? secondString[0] : undefined}
+                backgroundColor={preferences.backgroundColor}
               >
                 <DigitWrapper>
                   <span>{secondString[0]}</span>
@@ -205,6 +210,7 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
                 flipStyle={preferences.flipStyle}
                 oldDigit={shouldPassDigits ? prevSecondStringRef.current[1] : undefined}
                 newDigit={shouldPassDigits ? secondString[1] : undefined}
+                backgroundColor={preferences.backgroundColor}
               >
                 <DigitWrapper>
                   <span>{secondString[1]}</span>

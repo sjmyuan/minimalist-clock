@@ -12,6 +12,7 @@ interface AnimationHandlerProps {
   flipStyle?: FlipStyle;
   oldDigit?: string;
   newDigit?: string;
+  backgroundColor?: string;
 }
 
 const AnimatedContainer = styled.div`
@@ -31,7 +32,7 @@ const HeightReference = styled.div`
   visibility: hidden;
 `;
 
-const StaticCard = styled.div<{ $clipPath: string }>`
+const StaticCard = styled.div<{ $clipPath: string; $backgroundColor: string }>`
   clip-path: ${props => props.$clipPath};
   position: absolute;
   top: 0;
@@ -39,9 +40,20 @@ const StaticCard = styled.div<{ $clipPath: string }>`
   right: 0;
   bottom: 0;
   z-index: 1;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: ${props => props.$backgroundColor};
+    z-index: -1;
+  }
 `;
 
-const OverlayCard = styled.div<{ $clipPath: string }>`
+const OverlayCard = styled.div<{ $clipPath: string; $backgroundColor: string }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -50,6 +62,17 @@ const OverlayCard = styled.div<{ $clipPath: string }>`
   z-index: 100;
   clip-path: ${props => props.$clipPath};
   transform-style: preserve-3d;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: ${props => props.$backgroundColor};
+    z-index: -1;
+  }
 `;
 
 export const AnimationHandler: React.FC<AnimationHandlerProps> = ({
@@ -59,6 +82,7 @@ export const AnimationHandler: React.FC<AnimationHandlerProps> = ({
   flipStyle = 'classic-flip',
   oldDigit,
   newDigit,
+  backgroundColor = '#000000',
 }) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const overlayRef = React.useRef<HTMLDivElement>(null);
@@ -175,11 +199,11 @@ export const AnimationHandler: React.FC<AnimationHandlerProps> = ({
       <FlipCardContainer ref={containerRef}>
         <HeightReference>{displayContent}</HeightReference>
         {/* Upper static card: top half of old digit */}
-        <StaticCard data-card-type="upper" $clipPath="inset(0 0 50% 0)">
+        <StaticCard data-card-type="upper" $clipPath="inset(0 0 50% 0)" $backgroundColor={backgroundColor}>
           {oldDigitContent}
         </StaticCard>
         {/* Bottom static card: starts with bottom half of old digit, switches to new digit */}
-        <StaticCard data-card-type="bottom" $clipPath="inset(50% 0 0 0)">
+        <StaticCard data-card-type="bottom" $clipPath="inset(50% 0 0 0)" $backgroundColor={backgroundColor}>
           {bottomCardContent}
         </StaticCard>
         {/* Overlay: starts as top half of old digit, becomes bottom half of new digit */}
@@ -187,6 +211,7 @@ export const AnimationHandler: React.FC<AnimationHandlerProps> = ({
           ref={overlayRef} 
           data-card-type="overlay"
           $clipPath={overlayClipPath}
+          $backgroundColor={backgroundColor}
         >
           <div ref={overlayContentRef}>
             {overlayContent}
