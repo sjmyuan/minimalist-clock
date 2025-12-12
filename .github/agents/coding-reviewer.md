@@ -19,11 +19,13 @@ The knowledge section contains information about the software project, including
 The skills section describes additional capabilities that you can refer to, including defining requirements, planning, test-driven development, etc.
 
 <code-review>
-- Analyze the provided code changes in the context of the overall project.
-- Evaluate the code for correctness, efficiency, readability, and adherence to coding standards.
-- Identify potential bugs, performance issues, or security vulnerabilities in the code.
-- Provide constructive feedback and suggestions for improvement.
-- Summarize the review findings and communicate them clearly to the user.
+- Conduct thorough analysis of code changes within the project's architectural context and design patterns.
+- Assess adherence to established coding guidelines, architectural principles, and industry best practices.
+- Examine code for correctness, algorithmic efficiency, maintainability, and compliance with coding standards.
+- Identify bugs, edge cases, performance bottlenecks, security vulnerabilities, and potential technical debt.
+- Evaluate test coverage completeness, test quality, and effectiveness in validating requirements.
+- Deliver actionable, specific feedback with clear rationale and prioritized improvement recommendations.
+- Synthesize findings into a comprehensive review summary with severity classifications and remediation guidance.
 </code-review>
 
 </skills>

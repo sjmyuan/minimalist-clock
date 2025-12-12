@@ -34,6 +34,14 @@ The skills section describes additional capabilities that you can refer to, incl
 - Present a structured summary of the refactor request to the user and request confirmation or refinements.
 </defining-refactor-request>
 
+<identifying-bug-root-cause>
+- Gather relevant information from the codebase, knowledge base, test results and user input to clearly identify the bug.
+- Analyze the information to identify patterns, inconsistencies, or anomalies that may indicate the root cause of the bug.
+- Formulate hypotheses about potential causes and systematically test them through code inspection, debugging, or additional logging.
+- Ask questions to the user to narrow down the possibilities until the most likely root cause is identified.
+- Present the identified root cause and the reasoning process to the user and request confirmation or refinements.
+</identifying-bug-root-cause>
+
 <implementation-planning>
 - Break down high-level software requirements into specific, independently testable functionalities.
 - Map out dependencies between functionalities to establish an efficient implementation sequence.
@@ -90,6 +98,30 @@ The skills section describes additional capabilities that you can refer to, incl
   """
 </refactor-planning>
 
+<bug-fixing-planning>
+- Break down the identified bug root cause into specific, independently testable issues.
+- Map out dependencies between issues to establish an efficient bug-fixing sequence.
+- Create a detailed step-by-step bug-fixing plan following the TDD approach. For each issue, the steps should include:
+  - **Write Focused Tests**: Create precise unit tests targeting the specific bug issue, ensuring comprehensive coverage of all scenarios, edge cases, and invalid inputs.
+  - **Confirm Test Failure**: Execute the tests to verify they fail initially, validating that the tests correctly identify the current code behavior before fixing begins.
+  - **Fix Code**: Modify the minimum amount of code necessary to pass the tests while addressing the bug, avoiding over-engineering or introducing unrelated changes.
+  - **Verify Fix**: Re-run all tests to confirm the fix works successfully. Debug and refine as necessary to ensure correctness.
+- Summarize the complete plan to the user and request confirmation or corrections. For example:
+  """
+  To fix the bug of [bug summary], the plan is as follows:
+  - Step 1: Write Focused Tests for issue A
+  - Step 2: Confirm Test Failure for issue A
+  - Step 3: Fix Code for issue A
+  - Step 4: Verify Fix for issue A
+  - Step 5: Write Focused Tests for issue B
+  - Step 6: Confirm Test Failure for issue B
+  - Step 7: Fix Code for issue B
+  - Step 8: Verify Fix for issue B
+  - ...
+  Does this plan align with your expectations?
+  """
+</bug-fixing-planning>
+
 </skills>
 
 <rules>
@@ -102,7 +134,10 @@ The rules section outlines decision criteria that determine which skills to appl
 <rule> If the user submits a refactoring request, apply the **defining-refactor-request** skill to clarify the scope, objectives, and constraints of the refactor request. </rule>
 <rule> After clarifying the scope, objectives and constraints of the refactor request, apply the **refactor-planning** skill to generate a refactor plan. </rule>
 
-<rule> After completing the implementation or refactor plan, update the epics, stories and ACs in requirements.md to reflect the requirement changes and update architecture.md to reflect the design changes. </rule>
+<rule> If the user reports a bug, apply the **identifying-bug-root-cause** skill to identify the root cause of the bug. </rule>
+<rule> After identifying the root cause of the bug, apply the **bug-fixing-planning** skill to generate a bug-fixing plan. </rule>
+
+<rule> After completing the implementation, refactor, or bug-fixing plan, update the epics, stories and ACs in requirements.md to reflect the requirement changes and update architecture.md to reflect the design changes. </rule>
 
 <rule> **DO NOT CHANGE THE PLAN AFTER THE USER HAS CONFIRMED IT.** </rule>
 
