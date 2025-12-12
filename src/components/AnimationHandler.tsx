@@ -106,6 +106,15 @@ export const AnimationHandler: React.FC<AnimationHandlerProps> = ({
   const [overlayDigit, setOverlayDigit] = React.useState<string | undefined>(oldDigit);
   const [bottomCardDigit, setBottomCardDigit] = React.useState<string | undefined>(oldDigit);
 
+  // Sync bottomCardDigit with newDigit when they are the same (e.g., after style switch)
+  // This ensures the card displays correctly when switching to card-fold style
+  React.useEffect(() => {
+    if (oldDigit === newDigit) {
+      setBottomCardDigit(newDigit);
+      setOverlayDigit(oldDigit);
+    }
+  }, [oldDigit, newDigit]);
+
   React.useEffect(() => {
     if (trigger && overlayRef.current && flipStyle === 'card-fold') {
       // Physical flip clock: Two-phase animation timeline
