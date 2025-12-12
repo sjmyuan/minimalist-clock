@@ -40,6 +40,13 @@ const StaticCard = styled.div<{ $clipPath: string; $backgroundColor: string }>`
   right: 0;
   bottom: 0;
   z-index: 1;
+  overflow: hidden;
+  border-radius: 0.15em;
+  
+  & > * {
+    overflow: hidden;
+    border-radius: 0.15em;
+  }
   
   &::before {
     content: '';
@@ -62,6 +69,13 @@ const OverlayCard = styled.div<{ $clipPath: string; $backgroundColor: string }>`
   z-index: 100;
   clip-path: ${props => props.$clipPath};
   transform-style: preserve-3d;
+  overflow: hidden;
+  border-radius: 0.15em;
+  
+  & > * {
+    overflow: hidden;
+    border-radius: 0.15em;
+  }
   
   &::before {
     content: '';
