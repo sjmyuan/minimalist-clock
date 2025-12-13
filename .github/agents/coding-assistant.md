@@ -12,6 +12,9 @@ The knowledge section contains information about the software project, including
 </architecture>
 
 <coding-guidelines>
+- Follow the existing code style and conventions.
+- Ensure all new code is covered by tests.
+- Use meaningful variable and function names.
 </coding-guidelines>
 
 </knowledge>
