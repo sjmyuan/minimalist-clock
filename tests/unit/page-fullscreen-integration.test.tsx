@@ -2,12 +2,16 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Home from '@/app/page';
+import { useFullscreen, loadPreferences } from '@/src/utils';
 
 // Mock the components and hooks
 jest.mock('@/src/components', () => ({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ClockDisplay: ({ preferences }: any) => <div data-testid="clock-display">Clock Display</div>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Settings: ({ isOpen, onClose }: any) => 
     isOpen ? <div data-testid="settings">Settings Panel</div> : null,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   FullscreenButton: ({ onClick, isFullscreen }: any) => (
     <button onClick={onClick} data-testid="fullscreen-button">
       {isFullscreen ? 'Exit Full-Screen' : 'Full-Screen'}
@@ -33,7 +37,9 @@ jest.mock('@/src/utils', () => ({
 }));
 
 describe('Home page - Fullscreen integration', () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let mockDocumentElement: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let mockDocument: any;
 
   beforeEach(() => {
@@ -102,8 +108,7 @@ describe('Home page - Fullscreen integration', () => {
 
   it('should call toggleFullscreen when fullscreen button is clicked', () => {
     const mockToggleFullscreen = jest.fn();
-    const { useFullscreen } = require('@/src/utils');
-    useFullscreen.mockReturnValue({
+    (useFullscreen as jest.Mock).mockReturnValue({
       isFullscreen: false,
       enterFullscreen: jest.fn(),
       exitFullscreen: jest.fn(),
@@ -119,10 +124,9 @@ describe('Home page - Fullscreen integration', () => {
   });
 
   it('should update button text when entering fullscreen', () => {
-    const { useFullscreen } = require('@/src/utils');
     
     // First render - not in fullscreen
-    useFullscreen.mockReturnValue({
+    (useFullscreen as jest.Mock).mockReturnValue({
       isFullscreen: false,
       enterFullscreen: jest.fn(),
       exitFullscreen: jest.fn(),
@@ -134,7 +138,7 @@ describe('Home page - Fullscreen integration', () => {
     expect(fullscreenButton).toHaveTextContent('Full-Screen');
 
     // Simulate entering fullscreen
-    useFullscreen.mockReturnValue({
+    (useFullscreen as jest.Mock).mockReturnValue({
       isFullscreen: true,
       enterFullscreen: jest.fn(),
       exitFullscreen: jest.fn(),
@@ -171,7 +175,12 @@ describe('Home page - Fullscreen integration', () => {
   });
 
   it('should maintain preferences state when toggling fullscreen', () => {
-    const { loadPreferences } = require('@/src/utils');
+    (loadPreferences as jest.Mock).mockReturnValue({
+      fontSize: 48,
+      fontColor: '#FFFFFF',
+      backgroundColor: '#000000',
+      showSeconds: false,
+    });
     
     render(<Home />);
     

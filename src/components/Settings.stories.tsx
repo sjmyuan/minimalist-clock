@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Settings } from './Settings';
-import { useState } from 'react';
+import { useState, ComponentProps } from 'react';
 
 const meta: Meta<typeof Settings> = {
   title: 'Components/Settings',
@@ -14,7 +14,7 @@ const meta: Meta<typeof Settings> = {
 export default meta;
 type Story = StoryObj<typeof Settings>;
 
-const SettingsWrapper = (args: any) => {
+const SettingsWrapper = (args: ComponentProps<typeof Settings>) => {
   const [preferences, setPreferences] = useState(args.preferences);
   
   return (

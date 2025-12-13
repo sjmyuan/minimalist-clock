@@ -2,7 +2,9 @@ import { renderHook, act } from '@testing-library/react';
 import { useFullscreen } from '@/src/utils/fullscreen';
 
 describe('fullscreen utils', () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let mockDocumentElement: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let mockDocument: any;
 
   beforeEach(() => {
@@ -109,6 +111,7 @@ describe('fullscreen utils', () => {
     it('should update isFullscreen state when fullscreen changes', () => {
       const { result } = renderHook(() => useFullscreen());
       const fullscreenChangeHandler = mockDocument.addEventListener.mock.calls.find(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (call: any[]) => call[0] === 'fullscreenchange'
       )?.[1];
 

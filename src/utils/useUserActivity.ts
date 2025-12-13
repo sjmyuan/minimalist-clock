@@ -29,8 +29,9 @@ export function useUserActivity(options: UseUserActivityOptions = {}) {
 
   useEffect(() => {
     if (!enabled) {
-      setIsActive(true);
-      return;
+      // Use setTimeout to avoid synchronous state update warning
+      const timer = setTimeout(() => setIsActive(true), 0);
+      return () => clearTimeout(timer);
     }
 
     const handleActivity = () => {
@@ -45,9 +46,10 @@ export function useUserActivity(options: UseUserActivityOptions = {}) {
     document.addEventListener('touchmove', handleActivity);
 
     // Initial timeout
-    resetTimeout();
+    const initialTimer = setTimeout(() => resetTimeout(), 0);
 
     return () => {
+      clearTimeout(initialTimer);
       document.removeEventListener('mousemove', handleActivity);
       document.removeEventListener('mousedown', handleActivity);
       document.removeEventListener('keydown', handleActivity);

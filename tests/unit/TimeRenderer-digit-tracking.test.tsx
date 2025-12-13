@@ -5,9 +5,11 @@ import { TimeRenderer } from '@/src/components/TimeRenderer';
 import { TimeObject, UserPreferences } from '@/src/types';
 
 // Mock AnimationHandler to capture props
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let capturedAnimationProps: any[] = [];
 
 jest.mock('@/src/components/AnimationHandler', () => ({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   AnimationHandler: ({ children, oldDigit, newDigit, trigger, flipStyle }: any) => {
     capturedAnimationProps.push({ oldDigit, newDigit, trigger, flipStyle });
     return <div data-testid="animation-handler">{children}</div>;
