@@ -2,9 +2,10 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { gsap } from 'gsap';
 import { FlipStyle } from '@/src/types';
 import { CardFoldAnimation } from './CardFoldAnimation';
+import { ClassicFlipAnimation } from './ClassicFlipAnimation';
+import { DropDownAnimation } from './DropDownAnimation';
 
 interface AnimationHandlerProps {
   children?: React.ReactNode;
@@ -33,7 +34,6 @@ export const AnimationHandler: React.FC<AnimationHandlerProps> = ({
   backgroundColor = '#000000',
   renderContent,
 }) => {
-  const containerRef = React.useRef<HTMLDivElement>(null);
   const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
 
   React.useEffect(() => {
@@ -45,44 +45,6 @@ export const AnimationHandler: React.FC<AnimationHandlerProps> = ({
   }, []);
 
   const effectiveDuration = prefersReducedMotion ? 0 : duration;
-
-  React.useEffect(() => {
-    if (trigger && containerRef.current && flipStyle !== 'card-fold') {
-      if (prefersReducedMotion) {
-        // Instant update without animation
-        gsap.set(containerRef.current, { opacity: 1, rotateX: 0, y: 0 });
-        return;
-      }
-
-      if (flipStyle === 'drop-down') {
-        // Drop-down animation: upper half drops with 3D perspective
-        gsap.fromTo(
-          containerRef.current,
-          { 
-            y: '-50%', 
-            rotateX: -15, 
-            opacity: 0,
-            transformOrigin: 'center top'
-          },
-          { 
-            y: 0, 
-            rotateX: 0, 
-            opacity: 1, 
-            duration: effectiveDuration, 
-            ease: 'power2.out',
-            transformOrigin: 'center top'
-          }
-        );
-      } else {
-        // Classic flip animation: full 3D rotateX flip
-        gsap.fromTo(
-          containerRef.current,
-          { rotateX: -90, opacity: 0 },
-          { rotateX: 0, opacity: 1, duration: effectiveDuration, ease: 'power2.out' }
-        );
-      }
-    }
-  }, [trigger, effectiveDuration, flipStyle, prefersReducedMotion]);
 
   if (flipStyle === 'card-fold') {
     const safeOldDigit = oldDigit ?? '';
@@ -122,8 +84,28 @@ export const AnimationHandler: React.FC<AnimationHandlerProps> = ({
     }
     
     // If we can't render card-fold properly, just render children (though animation won't work right)
-    return <AnimatedContainer ref={containerRef}>{children}</AnimatedContainer>;
+    return <AnimatedContainer>{children}</AnimatedContainer>;
   }
 
-  return <AnimatedContainer ref={containerRef}>{children}</AnimatedContainer>;
+  if (flipStyle === 'drop-down') {
+    return (
+      <DropDownAnimation
+        trigger={trigger}
+        duration={effectiveDuration}
+        prefersReducedMotion={prefersReducedMotion}
+      >
+        {children}
+      </DropDownAnimation>
+    );
+  }
+
+  return (
+    <ClassicFlipAnimation
+      trigger={trigger}
+      duration={effectiveDuration}
+      prefersReducedMotion={prefersReducedMotion}
+    >
+      {children}
+    </ClassicFlipAnimation>
+  );
 };

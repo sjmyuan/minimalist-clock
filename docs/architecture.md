@@ -83,6 +83,7 @@ Rel(time_renderer, media_queries, "Adjusts layout dynamically")
 ```
 - **Time Renderer**: Displays the current time and triggers animations.
 - **Animation Handler**: Manages page-flip effects using a timer.
+- **ClassicFlipAnimation / DropDownAnimation / CardFoldAnimation**: Dedicated components implementing the three flip styles, with `AnimationHandler` selecting the appropriate implementation per user preference.
 - **Font Size Controller** and **Color Picker**: Apply user customizations to the clock.
 - **Media Queries**: Ensure the clock adapts to different screen sizes.
 

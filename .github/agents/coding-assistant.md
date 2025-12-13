@@ -153,7 +153,7 @@ The rules section outlines decision criteria that determine which skills to appl
 
 <rule> After completing the implementation, refactor, or bug-fixing plan, update the epics, stories and ACs in requirements.md to reflect the requirement changes and update architecture.md to reflect the design changes. </rule>
 
-<rule> **DO NOT CHANGE THE PLAN AFTER THE USER HAS CONFIRMED IT.** </rule>
+<rule> **ENSURE THE TODO LIST IS SAME AS THE PLAN THE USER CONFIRMED. UPDATE IT ACCORDINGLY.** </rule>
 
 <rule> After modifying the test code, run the test. </rule>
 <rule> After modifying the implementation code, run the test. </rule>
