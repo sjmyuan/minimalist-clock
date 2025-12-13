@@ -135,6 +135,11 @@ The technology stack is chosen to align with your preferences for TypeScript, Ne
 
 ### **2.5 Testing**
 - **Unit Testing**: Jest with React Testing Library.
+  - All unit tests use Jest as the test runner
+  - Tests follow consistent structure with `describe()` and `it()` blocks
+  - Mocks are placed at the top level using `jest.mock()`
+  - Setup and teardown use `beforeEach()` and `afterEach()` hooks
+  - Test assertions use @testing-library/jest-dom matchers (configured in jest.setup.js)
 - **End-to-End Testing**: Cypress.
 
 ### **2.6 Deployment**

@@ -1,7 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import { renderHook, act } from '@testing-library/react';
+import { render, screen, waitFor, renderHook, act } from '@testing-library/react';
 import { useResponsiveLayout } from '@/src/utils/useResponsiveLayout';
 import { ClockDisplay } from '@/src/components/ClockDisplay';
 import { UserPreferences } from '@/src/types';
