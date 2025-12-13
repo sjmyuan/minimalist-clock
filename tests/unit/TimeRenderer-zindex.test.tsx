@@ -22,7 +22,7 @@ describe('TimeRenderer - Z-Index Layering', () => {
 
   describe('Cross line covering digit', () => {
     it('should render digit span with z-index 1 so cross lines can cover it', () => {
-      const { container } = render(
+      render(
         <TimeRenderer
           time={mockTime}
           preferences={defaultPreferences}
@@ -62,7 +62,7 @@ describe('TimeRenderer - Z-Index Layering', () => {
     });
 
     it('should have digit wrapper with position relative to enable z-index stacking', () => {
-      const { container } = render(
+      render(
         <TimeRenderer
           time={mockTime}
           preferences={defaultPreferences}

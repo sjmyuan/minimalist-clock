@@ -15,9 +15,6 @@ jest.mock('gsap', () => ({
   },
 }));
 
-const mockFromTo = gsap.fromTo as jest.MockedFunction<typeof gsap.fromTo>;
-const mockTimeline = gsap.timeline as jest.MockedFunction<typeof gsap.timeline>;
-
 describe('AnimationHandler', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -140,7 +137,6 @@ describe('AnimationHandler', () => {
       );
 
       const animatedContainer = container.firstChild as HTMLElement;
-      const styles = window.getComputedStyle(animatedContainer);
       
       // Check for transform-style preserve-3d (may be computed differently)
       expect(animatedContainer).toBeInTheDocument();

@@ -18,12 +18,15 @@ export const Default: Story = {
     time: {
       hours: 14,
       minutes: 30,
+      seconds: 0,
       date: 'Saturday, December 7, 2025',
     },
     preferences: {
       fontSize: 120,
       fontColor: '#FFFFFF',
       backgroundColor: '#000000',
+      showSeconds: false,
+      flipStyle: 'classic-flip',
     },
     shouldAnimateDigit0: false,
     shouldAnimateDigit1: false,
@@ -37,12 +40,15 @@ export const SmallSize: Story = {
     time: {
       hours: 9,
       minutes: 5,
+      seconds: 0,
       date: 'Saturday, December 7, 2025',
     },
     preferences: {
       fontSize: 48,
       fontColor: '#FFFFFF',
       backgroundColor: '#000000',
+      showSeconds: false,
+      flipStyle: 'classic-flip',
     },
     shouldAnimateDigit0: false,
     shouldAnimateDigit1: false,
@@ -56,12 +62,15 @@ export const CustomColors: Story = {
     time: {
       hours: 23,
       minutes: 59,
+      seconds: 0,
       date: 'Saturday, December 7, 2025',
     },
     preferences: {
       fontSize: 120,
       fontColor: '#00FF00',
       backgroundColor: '#000000',
+      showSeconds: false,
+      flipStyle: 'classic-flip',
     },
     shouldAnimateDigit0: false,
     shouldAnimateDigit1: false,

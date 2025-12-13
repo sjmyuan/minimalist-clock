@@ -22,7 +22,7 @@ describe('Refactor: Digit Spacing Within Groups', () => {
 
   describe('Given the clock is displayed', () => {
     it('When viewing digit groups, Then the gap between two digits in each group should be comfortable (>=0.3rem)', () => {
-      const { container } = render(
+      render(
         <TimeRenderer
           time={defaultTime}
           preferences={defaultPreferences}

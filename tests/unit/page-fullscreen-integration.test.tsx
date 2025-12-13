@@ -1,15 +1,14 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Home from '@/app/page';
 import { useFullscreen, loadPreferences } from '@/src/utils';
 
 // Mock the components and hooks
 jest.mock('@/src/components', () => ({
+  ClockDisplay: () => <div data-testid="clock-display">Clock Display</div>,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ClockDisplay: ({ preferences }: any) => <div data-testid="clock-display">Clock Display</div>,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Settings: ({ isOpen, onClose }: any) => 
+  Settings: ({ isOpen }: any) => 
     isOpen ? <div data-testid="settings">Settings Panel</div> : null,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   FullscreenButton: ({ onClick, isFullscreen }: any) => (

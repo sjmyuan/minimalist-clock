@@ -105,7 +105,7 @@ describe('Minimalist Clock E2E Tests', () => {
 
       it('should update time display', () => {
         // Get initial time
-        cy.get('[data-testid="time-display"]').invoke('text').then((initialTime) => {
+        cy.get('[data-testid="time-display"]').invoke('text').then((_initialTime) => {
           // Wait for more than a minute to see time change
           // Note: This test relies on the system clock
           cy.wait(1000)
