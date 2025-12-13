@@ -23,18 +23,14 @@ describe('AnimationHandler', () => {
   describe('User Story 2.1: Page-Flip Animation Effects', () => {
     it('should trigger page-flip animation when trigger prop is true', async () => {
       const { rerender } = render(
-        <AnimationHandler trigger={false}>
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={false} digit="5" />
       );
 
       expect(gsap.fromTo).not.toHaveBeenCalled();
 
       // Trigger animation
       rerender(
-        <AnimationHandler trigger={true}>
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={true} digit="5" />
       );
 
       await waitFor(() => {
@@ -44,15 +40,11 @@ describe('AnimationHandler', () => {
 
     it('should apply page-flip animation with rotateX from -90 to 0 degrees', async () => {
       const { rerender } = render(
-        <AnimationHandler trigger={false}>
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={false} digit="5" />
       );
 
       rerender(
-        <AnimationHandler trigger={true}>
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={true} digit="5" />
       );
 
       await waitFor(() => {
@@ -66,15 +58,11 @@ describe('AnimationHandler', () => {
 
     it('should use animation duration between 500ms and 1000ms', async () => {
       const { rerender } = render(
-        <AnimationHandler trigger={false}>
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={false} digit="5" />
       );
 
       rerender(
-        <AnimationHandler trigger={true}>
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={true} digit="5" />
       );
 
       await waitFor(() => {
@@ -89,15 +77,11 @@ describe('AnimationHandler', () => {
 
     it('should include easing function for smooth animation', async () => {
       const { rerender } = render(
-        <AnimationHandler trigger={false}>
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={false} digit="5" />
       );
 
       rerender(
-        <AnimationHandler trigger={true}>
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={true} digit="5" />
       );
 
       await waitFor(() => {
@@ -111,9 +95,7 @@ describe('AnimationHandler', () => {
 
     it('should not trigger animation when trigger prop is false', () => {
       render(
-        <AnimationHandler trigger={false}>
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={false} digit="5" />
       );
 
       expect(gsap.fromTo).not.toHaveBeenCalled();
@@ -121,19 +103,15 @@ describe('AnimationHandler', () => {
 
     it('should render children correctly', () => {
       const { getByText } = render(
-        <AnimationHandler trigger={false}>
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={false} digit="5" />
       );
 
-      expect(getByText('Test Content')).toBeInTheDocument();
+      expect(getByText('5')).toBeInTheDocument();
     });
 
     it('should apply 3D transform styles for perspective effect', () => {
       const { container } = render(
-        <AnimationHandler trigger={false}>
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={false} digit="5" />
       );
 
       const animatedContainer = container.firstChild as HTMLElement;
@@ -146,15 +124,11 @@ describe('AnimationHandler', () => {
   describe('User Story 2.2: Moderate Animation Speed', () => {
     it('should use default animation duration of 750ms when duration prop is not provided', async () => {
       const { rerender } = render(
-        <AnimationHandler trigger={false}>
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={false} digit="5" />
       );
 
       rerender(
-        <AnimationHandler trigger={true}>
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={true} digit="5" />
       );
 
       await waitFor(() => {
@@ -169,15 +143,11 @@ describe('AnimationHandler', () => {
     it('should accept custom duration prop', async () => {
       const customDuration = 0.8;
       const { rerender } = render(
-        <AnimationHandler trigger={false} duration={customDuration}>
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={false} duration={customDuration} digit="5" />
       );
 
       rerender(
-        <AnimationHandler trigger={true} duration={customDuration}>
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={true} duration={customDuration} digit="5" />
       );
 
       await waitFor(() => {
@@ -191,16 +161,12 @@ describe('AnimationHandler', () => {
 
     it('should trigger animation only when trigger changes from false to true', async () => {
       const { rerender } = render(
-        <AnimationHandler trigger={false}>
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={false} digit="5" />
       );
 
       // First trigger
       rerender(
-        <AnimationHandler trigger={true}>
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={true} digit="5" />
       );
 
       await waitFor(() => {
@@ -209,9 +175,7 @@ describe('AnimationHandler', () => {
 
       // Trigger remains true - should not animate again
       rerender(
-        <AnimationHandler trigger={true}>
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={true} digit="5" />
       );
 
       // Still only called once
@@ -222,15 +186,11 @@ describe('AnimationHandler', () => {
   describe('User Story 3.4: Flip Style Selection', () => {
     it('should use classic-flip animation style by default (for backward compatibility)', async () => {
       const { rerender } = render(
-        <AnimationHandler trigger={false}>
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={false} digit="5" />
       );
 
       rerender(
-        <AnimationHandler trigger={true}>
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={true} digit="5" />
       );
 
       await waitFor(() => {
@@ -244,15 +204,11 @@ describe('AnimationHandler', () => {
 
     it('should use classic-flip animation when flipStyle is "classic-flip"', async () => {
       const { rerender } = render(
-        <AnimationHandler trigger={false} flipStyle="classic-flip">
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={false} flipStyle="classic-flip" digit="5" />
       );
 
       rerender(
-        <AnimationHandler trigger={true} flipStyle="classic-flip">
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={true} flipStyle="classic-flip" digit="5" />
       );
 
       await waitFor(() => {
@@ -266,15 +222,11 @@ describe('AnimationHandler', () => {
 
     it('should use drop-down animation when flipStyle is "drop-down"', async () => {
       const { rerender } = render(
-        <AnimationHandler trigger={false} flipStyle="drop-down">
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={false} flipStyle="drop-down" digit="5" />
       );
 
       rerender(
-        <AnimationHandler trigger={true} flipStyle="drop-down">
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={true} flipStyle="drop-down" digit="5" />
       );
 
       await waitFor(() => {
@@ -288,15 +240,11 @@ describe('AnimationHandler', () => {
 
     it('should apply 3D perspective effect for drop-down animation', async () => {
       const { rerender } = render(
-        <AnimationHandler trigger={false} flipStyle="drop-down">
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={false} flipStyle="drop-down" digit="5" />
       );
 
       rerender(
-        <AnimationHandler trigger={true} flipStyle="drop-down">
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={true} flipStyle="drop-down" digit="5" />
       );
 
       await waitFor(() => {
@@ -313,15 +261,11 @@ describe('AnimationHandler', () => {
 
     it('should use card-fold animation when flipStyle is "card-fold"', async () => {
       const { rerender } = render(
-        <AnimationHandler trigger={false} flipStyle="card-fold">
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={false} flipStyle="card-fold" oldDigit="5" newDigit="6" digit="6" />
       );
 
       rerender(
-        <AnimationHandler trigger={true} flipStyle="card-fold">
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={true} flipStyle="card-fold" oldDigit="5" newDigit="6" digit="6" />
       );
 
       await waitFor(() => {
@@ -332,9 +276,7 @@ describe('AnimationHandler', () => {
 
     it('should apply transform origin to top edge for card-fold animation', async () => {
       const { rerender, container } = render(
-        <AnimationHandler trigger={false} flipStyle="card-fold">
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={false} flipStyle="card-fold" oldDigit="5" newDigit="6" digit="6" />
       );
 
       // Check that overlay card has transform-origin set
@@ -342,9 +284,7 @@ describe('AnimationHandler', () => {
       expect(overlayCard).not.toBeNull();
       
       rerender(
-        <AnimationHandler trigger={true} flipStyle="card-fold">
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={true} flipStyle="card-fold" oldDigit="5" newDigit="6" digit="6" />
       );
 
       await waitFor(() => {
@@ -355,15 +295,11 @@ describe('AnimationHandler', () => {
 
     it('should use same duration and easing for card-fold as other styles', async () => {
       const { rerender } = render(
-        <AnimationHandler trigger={false} flipStyle="card-fold">
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={false} flipStyle="card-fold" oldDigit="5" newDigit="6" digit="6" />
       );
 
       rerender(
-        <AnimationHandler trigger={true} flipStyle="card-fold">
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={true} flipStyle="card-fold" oldDigit="5" newDigit="6" digit="6" />
       );
 
       await waitFor(() => {
@@ -384,9 +320,7 @@ describe('AnimationHandler', () => {
     describe('Card Structure', () => {
       it('should render FlipCardContainer when flipStyle is card-fold', () => {
         const { container } = render(
-          <AnimationHandler trigger={false} flipStyle="card-fold">
-            <div data-testid="digit-wrapper">5</div>
-          </AnimationHandler>
+          <AnimationHandler trigger={false} flipStyle="card-fold" oldDigit="5" newDigit="5" digit="5" />
         );
 
         // Should have a container that holds the flip card structure
@@ -396,9 +330,7 @@ describe('AnimationHandler', () => {
 
       it('should render UpperCard with top 50% clip-path for card-fold', () => {
         const { container } = render(
-          <AnimationHandler trigger={false} flipStyle="card-fold">
-            <div data-testid="digit-wrapper">5</div>
-          </AnimationHandler>
+          <AnimationHandler trigger={false} flipStyle="card-fold" oldDigit="5" newDigit="5" digit="5" />
         );
 
         // Find the upper card element (should have clip-path for top half)
@@ -409,9 +341,7 @@ describe('AnimationHandler', () => {
 
       it('should render BottomCard with bottom 50% clip-path for card-fold', () => {
         const { container } = render(
-          <AnimationHandler trigger={false} flipStyle="card-fold">
-            <div data-testid="digit-wrapper">5</div>
-          </AnimationHandler>
+          <AnimationHandler trigger={false} flipStyle="card-fold" oldDigit="5" newDigit="5" digit="5" />
         );
 
         // Find the bottom card element (should have clip-path for bottom half)
@@ -422,9 +352,7 @@ describe('AnimationHandler', () => {
 
       it('should render OverlayCard positioned absolutely for card-fold', () => {
         const { container } = render(
-          <AnimationHandler trigger={false} flipStyle="card-fold">
-            <div data-testid="digit-wrapper">5</div>
-          </AnimationHandler>
+          <AnimationHandler trigger={false} flipStyle="card-fold" oldDigit="5" newDigit="5" digit="5" />
         );
 
         // Find overlay card (should be absolutely positioned)
@@ -434,9 +362,7 @@ describe('AnimationHandler', () => {
 
       it('should have overlay card with higher z-index than static cards', () => {
         const { container } = render(
-          <AnimationHandler trigger={false} flipStyle="card-fold">
-            <div data-testid="digit-wrapper">5</div>
-          </AnimationHandler>
+          <AnimationHandler trigger={false} flipStyle="card-fold" oldDigit="5" newDigit="5" digit="5" />
         );
 
         const overlayCard = container.querySelector('[data-card-type="overlay"]');
@@ -448,9 +374,7 @@ describe('AnimationHandler', () => {
 
       it('should have overlay card with transform-origin center top', () => {
         const { container } = render(
-          <AnimationHandler trigger={false} flipStyle="card-fold">
-            <div data-testid="digit-wrapper">5</div>
-          </AnimationHandler>
+          <AnimationHandler trigger={false} flipStyle="card-fold" oldDigit="5" newDigit="5" digit="5" />
         );
 
         const overlayCard = container.querySelector('[data-card-type="overlay"]');
@@ -459,9 +383,7 @@ describe('AnimationHandler', () => {
 
       it('should render children normally for non-card-fold styles', () => {
         const { container } = render(
-          <AnimationHandler trigger={false} flipStyle="classic-flip">
-            <div data-testid="digit-wrapper">5</div>
-          </AnimationHandler>
+          <AnimationHandler trigger={false} flipStyle="classic-flip" digit="5" />
         );
 
         // For classic-flip, should not have split card structure
@@ -476,14 +398,20 @@ describe('AnimationHandler', () => {
 
       it('should clone children styling to split cards for card-fold', () => {
         const { container } = render(
-          <AnimationHandler trigger={false} flipStyle="card-fold">
-            <div data-testid="digit-wrapper" style={{ background: 'red', padding: '10px' }}>
-              5
-            </div>
-          </AnimationHandler>
+          <AnimationHandler
+            trigger={false}
+            flipStyle="card-fold"
+            oldDigit="5"
+            newDigit="5"
+            digit="5"
+            renderContent={(digit: string) => (
+              <div data-testid="digit-wrapper" style={{ background: 'red', padding: '10px' }}>
+                {digit}
+              </div>
+            )}
+          />
         );
 
-        // Cards should inherit or replicate the children's styling
         const upperCard = container.querySelector('[data-card-type="upper"]');
         expect(upperCard !== null).toBe(true);
       });
@@ -497,9 +425,8 @@ describe('AnimationHandler', () => {
             flipStyle="card-fold"
             oldDigit="5"
             newDigit="6"
-          >
-            <div data-testid="digit-wrapper">5</div>
-          </AnimationHandler>
+            digit="6"
+          />
         );
 
         // Should render without errors
@@ -513,9 +440,8 @@ describe('AnimationHandler', () => {
             flipStyle="card-fold"
             oldDigit="5"
             newDigit="6"
-          >
-            <div data-testid="digit-wrapper">X</div>
-          </AnimationHandler>
+            digit="6"
+          />
         );
 
         // Static cards should initially show oldDigit for both upper and bottom
@@ -540,9 +466,8 @@ describe('AnimationHandler', () => {
             trigger={false} 
             flipStyle="card-fold"
             oldDigit="5"
-          >
-            <div data-testid="digit-wrapper">X</div>
-          </AnimationHandler>
+            digit="5"
+          />
         );
 
         // Should display the oldDigit value
@@ -559,12 +484,11 @@ describe('AnimationHandler', () => {
           <AnimationHandler 
             trigger={false} 
             flipStyle="card-fold"
-          >
-            <div data-testid="digit-wrapper">7</div>
-          </AnimationHandler>
+            renderContent={(digit: string) => <div data-testid="digit-wrapper">{digit}</div>}
+            digit="7"
+          />
         );
 
-        // Should display children content
         const overlayCard = container.querySelector('[data-card-type="overlay"]');
         expect(overlayCard).not.toBeNull();
         if (overlayCard) {
@@ -574,37 +498,28 @@ describe('AnimationHandler', () => {
       });
 
       it('should maintain backward compatibility with non-card-fold styles', () => {
-        const { getByTestId } = render(
+        const { getByText } = render(
           <AnimationHandler 
             trigger={false} 
             flipStyle="classic-flip"
             oldDigit="5"
             newDigit="6"
-          >
-            <div data-testid="digit-wrapper">5</div>
-          </AnimationHandler>
+            digit="5"
+          />
         );
 
-        // For non-card-fold, digit props should be ignored and children rendered
-        const digitWrapper = getByTestId('digit-wrapper');
-        expect(digitWrapper).not.toBeNull();
-        expect(digitWrapper.textContent).toBe('5');
+        expect(getByText('5')).toBeInTheDocument();
       });
     });
 
     describe('Two-Phase Animation Timeline', () => {
       it('should use GSAP timeline for card-fold animation', async () => {
         const { rerender } = render(
-          <AnimationHandler trigger={false} flipStyle="card-fold">
-            <div>5</div>
-          </AnimationHandler>
+          <AnimationHandler trigger={false} flipStyle="card-fold" oldDigit="5" newDigit="6" digit="6" />
         );
 
-        // Trigger animation
         rerender(
-          <AnimationHandler trigger={true} flipStyle="card-fold">
-            <div>6</div>
-          </AnimationHandler>
+          <AnimationHandler trigger={true} flipStyle="card-fold" oldDigit="5" newDigit="6" digit="6" />
         );
 
         await waitFor(() => {
@@ -615,15 +530,11 @@ describe('AnimationHandler', () => {
 
       it('should have two animation phases for card-fold', async () => {
         const { rerender } = render(
-          <AnimationHandler trigger={false} flipStyle="card-fold">
-            <div>5</div>
-          </AnimationHandler>
+          <AnimationHandler trigger={false} flipStyle="card-fold" oldDigit="5" newDigit="6" digit="6" />
         );
 
         rerender(
-          <AnimationHandler trigger={true} flipStyle="card-fold">
-            <div>6</div>
-          </AnimationHandler>
+          <AnimationHandler trigger={true} flipStyle="card-fold" oldDigit="5" newDigit="6" digit="6" />
         );
 
         await waitFor(() => {
@@ -635,15 +546,11 @@ describe('AnimationHandler', () => {
 
       it('should use 375ms duration for each phase (total 750ms)', async () => {
         const { rerender } = render(
-          <AnimationHandler trigger={false} flipStyle="card-fold" duration={0.75}>
-            <div>5</div>
-          </AnimationHandler>
+          <AnimationHandler trigger={false} flipStyle="card-fold" duration={0.75} oldDigit="5" newDigit="6" digit="6" />
         );
 
         rerender(
-          <AnimationHandler trigger={true} flipStyle="card-fold" duration={0.75}>
-            <div>6</div>
-          </AnimationHandler>
+          <AnimationHandler trigger={true} flipStyle="card-fold" duration={0.75} oldDigit="5" newDigit="6" digit="6" />
         );
 
         await waitFor(() => {
@@ -660,15 +567,11 @@ describe('AnimationHandler', () => {
 
       it('should use power2.out easing for both phases', async () => {
         const { rerender } = render(
-          <AnimationHandler trigger={false} flipStyle="card-fold">
-            <div>5</div>
-          </AnimationHandler>
+          <AnimationHandler trigger={false} flipStyle="card-fold" oldDigit="5" newDigit="6" digit="6" />
         );
 
         rerender(
-          <AnimationHandler trigger={true} flipStyle="card-fold">
-            <div>6</div>
-          </AnimationHandler>
+          <AnimationHandler trigger={true} flipStyle="card-fold" oldDigit="5" newDigit="6" digit="6" />
         );
 
         await waitFor(() => {
@@ -684,15 +587,11 @@ describe('AnimationHandler', () => {
 
       it('should animate rotateX from 0 to -90 then 90 to 0 degrees', async () => {
         const { rerender } = render(
-          <AnimationHandler trigger={false} flipStyle="card-fold">
-            <div>5</div>
-          </AnimationHandler>
+          <AnimationHandler trigger={false} flipStyle="card-fold" oldDigit="5" newDigit="6" digit="6" />
         );
 
         rerender(
-          <AnimationHandler trigger={true} flipStyle="card-fold">
-            <div>6</div>
-          </AnimationHandler>
+          <AnimationHandler trigger={true} flipStyle="card-fold" oldDigit="5" newDigit="6" digit="6" />
         );
 
         await waitFor(() => {

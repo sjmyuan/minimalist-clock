@@ -16,6 +16,7 @@ interface AnimationHandlerProps {
   newDigit?: string;
   backgroundColor?: string;
   renderContent?: (digit: string) => React.ReactNode;
+  digit?: string;
 }
 
 const AnimatedContainer = styled.div`
@@ -33,6 +34,7 @@ export const AnimationHandler: React.FC<AnimationHandlerProps> = ({
   newDigit,
   backgroundColor = '#000000',
   renderContent,
+  digit,
 }) => {
   const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
 
@@ -46,11 +48,14 @@ export const AnimationHandler: React.FC<AnimationHandlerProps> = ({
 
   const effectiveDuration = prefersReducedMotion ? 0 : duration;
 
-  if (flipStyle === 'card-fold') {
-    const safeOldDigit = oldDigit ?? '';
-    const safeNewDigit = newDigit ?? safeOldDigit;
+  const resolvedDigit = digit ?? newDigit ?? oldDigit ?? '';
+  const resolvedRenderContent = renderContent ?? ((value: string) => <span>{value}</span>);
 
-    // Prefer renderContent if available
+  if (flipStyle === 'card-fold') {
+    const safeOldDigit = oldDigit ?? resolvedDigit;
+    const safeNewDigit = newDigit ?? digit ?? safeOldDigit;
+
+    // Prefer explicit renderContent when provided
     if (renderContent) {
       return (
         <CardFoldAnimation 
@@ -60,6 +65,21 @@ export const AnimationHandler: React.FC<AnimationHandlerProps> = ({
           newDigit={safeNewDigit}
           backgroundColor={backgroundColor}
           renderContent={renderContent}
+        />
+      );
+    }
+
+    // Use digit-driven default rendering when digits are provided
+    if (digit !== undefined || newDigit !== undefined || oldDigit !== undefined) {
+      const renderDigit = (value: string) => resolvedRenderContent(value);
+      return (
+        <CardFoldAnimation 
+          trigger={trigger}
+          duration={effectiveDuration}
+          oldDigit={safeOldDigit}
+          newDigit={safeNewDigit}
+          backgroundColor={backgroundColor}
+          renderContent={renderDigit}
         />
       );
     }
@@ -87,6 +107,12 @@ export const AnimationHandler: React.FC<AnimationHandlerProps> = ({
     return <AnimatedContainer>{children}</AnimatedContainer>;
   }
 
+  const content = renderContent
+    ? renderContent(resolvedDigit)
+    : (digit !== undefined || newDigit !== undefined || oldDigit !== undefined)
+      ? <span>{resolvedDigit}</span>
+      : children;
+
   if (flipStyle === 'drop-down') {
     return (
       <DropDownAnimation
@@ -94,7 +120,7 @@ export const AnimationHandler: React.FC<AnimationHandlerProps> = ({
         duration={effectiveDuration}
         prefersReducedMotion={prefersReducedMotion}
       >
-        {children}
+        {content}
       </DropDownAnimation>
     );
   }
@@ -105,7 +131,7 @@ export const AnimationHandler: React.FC<AnimationHandlerProps> = ({
       duration={effectiveDuration}
       prefersReducedMotion={prefersReducedMotion}
     >
-      {children}
+      {content}
     </ClassicFlipAnimation>
   );
 };

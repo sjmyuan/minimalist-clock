@@ -15,9 +15,7 @@ describe('FlipStyle Type - Card Fold Support', () => {
 
     it('should render AnimationHandler with card-fold style without TypeScript errors', () => {
       const { container } = render(
-        <AnimationHandler trigger={false} flipStyle="card-fold">
-          <div>Test Content</div>
-        </AnimationHandler>
+        <AnimationHandler trigger={false} flipStyle="card-fold" oldDigit="1" newDigit="1" digit="1" />
       );
 
       expect(container).toBeInTheDocument();

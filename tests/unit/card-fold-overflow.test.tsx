@@ -13,9 +13,8 @@ describe('Card Fold - Overflow Hidden Bug Fix', () => {
           flipStyle="card-fold"
           oldDigit="5"
           newDigit="6"
-        >
-          <div data-testid="digit-wrapper">5</div>
-        </AnimationHandler>
+          digit="6"
+        />
       );
 
       const upperCard = container.querySelector('[data-card-type="upper"]');
@@ -34,9 +33,8 @@ describe('Card Fold - Overflow Hidden Bug Fix', () => {
           flipStyle="card-fold"
           oldDigit="5"
           newDigit="6"
-        >
-          <div data-testid="digit-wrapper">5</div>
-        </AnimationHandler>
+          digit="6"
+        />
       );
 
       const bottomCard = container.querySelector('[data-card-type="bottom"]');
@@ -57,9 +55,8 @@ describe('Card Fold - Overflow Hidden Bug Fix', () => {
           flipStyle="card-fold"
           oldDigit="5"
           newDigit="6"
-        >
-          <div data-testid="digit-wrapper">5</div>
-        </AnimationHandler>
+          digit="6"
+        />
       );
 
       const upperCard = container.querySelector('[data-card-type="upper"]');
@@ -78,9 +75,8 @@ describe('Card Fold - Overflow Hidden Bug Fix', () => {
           flipStyle="card-fold"
           oldDigit="5"
           newDigit="6"
-        >
-          <div data-testid="digit-wrapper">5</div>
-        </AnimationHandler>
+          digit="6"
+        />
       );
 
       const bottomCard = container.querySelector('[data-card-type="bottom"]');
@@ -101,9 +97,8 @@ describe('Card Fold - Overflow Hidden Bug Fix', () => {
           flipStyle="card-fold"
           oldDigit="5"
           newDigit="6"
-        >
-          <div data-testid="digit-wrapper">5</div>
-        </AnimationHandler>
+          digit="6"
+        />
       );
 
       const overlayCard = container.querySelector('[data-card-type="overlay"]');
@@ -124,9 +119,8 @@ describe('Card Fold - Overflow Hidden Bug Fix', () => {
           flipStyle="card-fold"
           oldDigit="5"
           newDigit="6"
-        >
-          <div data-testid="digit-wrapper">5</div>
-        </AnimationHandler>
+          digit="6"
+        />
       );
 
       const overlayCard = container.querySelector('[data-card-type="overlay"]');
@@ -145,9 +139,8 @@ describe('Card Fold - Overflow Hidden Bug Fix', () => {
         <AnimationHandler 
           trigger={false} 
           flipStyle="classic-flip"
-        >
-          <div data-testid="digit-wrapper">5</div>
-        </AnimationHandler>
+          digit="5"
+        />
       );
 
       // Classic flip doesn't have card elements
@@ -160,9 +153,8 @@ describe('Card Fold - Overflow Hidden Bug Fix', () => {
         <AnimationHandler 
           trigger={false} 
           flipStyle="drop-down"
-        >
-          <div data-testid="digit-wrapper">5</div>
-        </AnimationHandler>
+          digit="5"
+        />
       );
 
       // Drop-down doesn't have card elements
@@ -179,9 +171,8 @@ describe('Card Fold - Overflow Hidden Bug Fix', () => {
           flipStyle="card-fold"
           oldDigit="5"
           newDigit="6"
-        >
-          <div data-testid="digit-wrapper">5</div>
-        </AnimationHandler>
+          digit="6"
+        />
       );
 
       const upperCard = container.querySelector('[data-card-type="upper"]');
@@ -201,9 +192,8 @@ describe('Card Fold - Overflow Hidden Bug Fix', () => {
           flipStyle="card-fold"
           oldDigit="5"
           newDigit="6"
-        >
-          <div data-testid="digit-wrapper">5</div>
-        </AnimationHandler>
+          digit="6"
+        />
       );
 
       const overlayCard = container.querySelector('[data-card-type="overlay"]');

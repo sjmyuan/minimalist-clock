@@ -79,10 +79,6 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
   // Determine if we should pass digit props (only for card-fold style)
   const shouldPassDigits = preferences.flipStyle === 'card-fold';
 
-  const renderDigitContent = (digit: string) => (
-    <span>{digit}</span>
-  );
-
   const renderDigit = (
     digit: string, 
     prevDigit: string, 
@@ -96,10 +92,8 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
       oldDigit={shouldPassDigits ? prevDigit : undefined}
       newDigit={shouldPassDigits ? digit : undefined}
       backgroundColor={preferences.backgroundColor}
-      renderContent={renderDigitContent}
-    >
-      {renderDigitContent(digit)}
-    </AnimationHandler>
+      digit={digit}
+    />
   );
 
   return (

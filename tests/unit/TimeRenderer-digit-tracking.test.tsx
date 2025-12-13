@@ -10,9 +10,9 @@ let capturedAnimationProps: any[] = [];
 
 jest.mock('@/src/components/AnimationHandler', () => ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  AnimationHandler: ({ children, oldDigit, newDigit, trigger, flipStyle }: any) => {
-    capturedAnimationProps.push({ oldDigit, newDigit, trigger, flipStyle });
-    return <div data-testid="animation-handler">{children}</div>;
+  AnimationHandler: ({ children, oldDigit, newDigit, trigger, flipStyle, digit }: any) => {
+    capturedAnimationProps.push({ oldDigit, newDigit, trigger, flipStyle, digit });
+    return <div data-testid="animation-handler">{children ?? digit}</div>;
   },
 }));
 
