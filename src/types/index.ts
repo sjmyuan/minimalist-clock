@@ -26,6 +26,8 @@ export interface UserPreferences {
   backgroundColor: string;
   showSeconds: boolean;
   flipStyle: FlipStyle;
+  fontFamily: string;
+  fontWeight: number;
 }
 
 /**

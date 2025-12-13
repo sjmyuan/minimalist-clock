@@ -18,6 +18,7 @@ The knowledge section contains information about the software project, including
 - Favor TypeScript correctness: clear types, no `any` unless justified, and avoid unsafe casts.
 - Prioritize accessibility and UX correctness for a full-screen clock experience (focus handling, keyboard interactions, and readable contrast).
 - Ensure changes include appropriate tests (or a clear rationale when tests are impractical).
+- Ensure the test file name matches the component file name being tested. For example, if the component file is `Component.tsx`, the test file should be named `Component.test.tsx`.
 </coding-guidelines>
 
 </knowledge>

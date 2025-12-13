@@ -1,7 +1,7 @@
 ### **Project: Minimalist Clock**
 
 #### **Project Description**
-The Minimalist Clock is a web-based application designed to provide users with an immersive and visually appealing time display. The clock features a full-screen view with large hour and minute digits, accompanied by a smaller date display at the top. The design emphasizes simplicity, with a black background, white font, and page-flip animations for digit transitions. Users can customize font size, color, and background color to personalize their experience.
+The Minimalist Clock is a web-based application designed to provide users with an immersive and visually appealing time display. The clock features a full-screen view with large hour and minute digits, accompanied by a smaller date display at the top. The design emphasizes simplicity, with a black background, white font, and page-flip animations for digit transitions. Users can customize font size, font family, font weight, color, and background color to personalize their experience.
 
 ---
 
@@ -23,7 +23,7 @@ The Minimalist Clock is a web-based application designed to provide users with a
 
 - **Needs**:
   - A full-screen minimalist clock with page-flip animation effects.
-  - Basic customization options (font size, color, background color).
+  - Comprehensive customization options (font size, font family, font weight, color, background color).
   - Smooth animations and compatibility with mainstream browsers (Chrome).
 
 ---
@@ -54,6 +54,8 @@ The Minimalist Clock is a web-based application designed to provide users with a
 - **User Story 3.2**: As a [Tech-Savvy Decorator], I want to change the font color and background color so that I can personalize my clock's appearance.
 - **User Story 3.3**: As a [Tech-Savvy Decorator], I want to toggle the display of seconds so that I can choose between a simpler HH:MM display or a more detailed HH:MM:SS display.
 - **User Story 3.4**: As a [Tech-Savvy Decorator], I want to select different flip animation styles so that I can choose the visual effect that best suits my preference.
+- **User Story 3.5**: As a [Tech-Savvy Decorator], I want to change the font family so that I can match the clock's typography to my preferred style.
+- **User Story 3.6**: As a [Tech-Savvy Decorator], I want to adjust the font weight so that I can control the thickness and visual prominence of the clock digits.
 
 #### Epic 4: Responsive Design
 - **User Story 4.1**: As a [Tech-Savvy Decorator], I want the clock to display well on tablets and desktops so that I can use it on different devices.
@@ -138,6 +140,18 @@ The Minimalist Clock is a web-based application designed to provide users with a
 - Given the user refreshes the page, When the page reloads, Then the flip style preference should restore to the user's last saved value.
 - Given the user does not make any customizations, When the page first loads, Then the flip style should default to "Drop Down".
 - Given any flip style is selected, When the animation executes, Then the animation duration should remain at 750ms with smooth easing (power2.out) applied to each phase.
+
+#### **User Story 3.5**: Change Font Family
+- Given the user opens the settings panel, When the user views the font family selector, Then multiple font options should be available including: "Courier New", "Monospace", "Arial", "Helvetica", "Sans-serif", "Georgia", "Times New Roman", and "Serif".
+- Given the user selects a different font family, When the selection is made, Then the clock digits should update in real-time to display the selected font.
+- Given the user refreshes the page, When the page reloads, Then the font family preference should restore to the user's last saved value.
+- Given the user does not make any customizations, When the page first loads, Then the default font family should be "Courier New, monospace".
+
+#### **User Story 3.6**: Adjust Font Weight
+- Given the user opens the settings panel, When the user views the font weight selector, Then nine weight options should be available: 100 (Thin), 200 (Extra Light), 300 (Light), 400 (Normal), 500 (Medium), 600 (Semi Bold), 700 (Bold), 800 (Extra Bold), and 900 (Black).
+- Given the user selects a different font weight, When the selection is made, Then the clock digits should update in real-time to display the selected weight.
+- Given the user refreshes the page, When the page reloads, Then the font weight preference should restore to the user's last saved value.
+- Given the user does not make any customizations, When the page first loads, Then the default font weight should be 300 (Light).
 
 ---
 

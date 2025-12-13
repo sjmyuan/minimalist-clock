@@ -149,6 +149,45 @@ export const Settings: React.FC<SettingsProps> = ({
           <option value="card-fold">Card Fold</option>
         </Input>
       </SettingGroup>
+
+      <SettingGroup>
+        <Label htmlFor="fontFamily">Font Family</Label>
+        <Input
+          as="select"
+          id="fontFamily"
+          value={preferences.fontFamily}
+          onChange={(e) => handleChange('fontFamily', e.target.value)}
+        >
+          <option value="Courier New, monospace">Courier New</option>
+          <option value="monospace">Monospace</option>
+          <option value="Arial, sans-serif">Arial</option>
+          <option value="Helvetica, sans-serif">Helvetica</option>
+          <option value="sans-serif">Sans-serif</option>
+          <option value="Georgia, serif">Georgia</option>
+          <option value="Times New Roman, serif">Times New Roman</option>
+          <option value="serif">Serif</option>
+        </Input>
+      </SettingGroup>
+
+      <SettingGroup>
+        <Label htmlFor="fontWeight">Font Weight</Label>
+        <Input
+          as="select"
+          id="fontWeight"
+          value={preferences.fontWeight}
+          onChange={(e) => handleChange('fontWeight', parseInt(e.target.value))}
+        >
+          <option value="100">100 - Thin</option>
+          <option value="200">200 - Extra Light</option>
+          <option value="300">300 - Light</option>
+          <option value="400">400 - Normal</option>
+          <option value="500">500 - Medium</option>
+          <option value="600">600 - Semi Bold</option>
+          <option value="700">700 - Bold</option>
+          <option value="800">800 - Extra Bold</option>
+          <option value="900">900 - Black</option>
+        </Input>
+      </SettingGroup>
     </SettingsOverlay>
   );
 };

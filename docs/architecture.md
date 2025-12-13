@@ -214,7 +214,9 @@ The interface specification defines internal module-to-module communication.
       "fontColor": "#FFFFFF",
       "backgroundColor": "#000000",
       "showSeconds": false,
-      "flipStyle": "drop-down"
+      "flipStyle": "drop-down",
+      "fontFamily": "Courier New, monospace",
+      "fontWeight": 300
     }
     ```
   - **Output**: None (updates the UI).
@@ -227,7 +229,9 @@ The interface specification defines internal module-to-module communication.
       "fontColor": "#FFFFFF",
       "backgroundColor": "#000000",
       "showSeconds": false,
-      "flipStyle": "drop-down"
+      "flipStyle": "drop-down",
+      "fontFamily": "Courier New, monospace",
+      "fontWeight": 300
     }
     ```
   - **Output**: None (persists data).

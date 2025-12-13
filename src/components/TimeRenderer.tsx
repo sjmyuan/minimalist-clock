@@ -21,8 +21,8 @@ interface TimeRendererProps {
 const TimeContainer = styled.div<{ $preferences: UserPreferences; $scaleFactor: number }>`
   font-size: ${(props) => props.$preferences.fontSize * props.$scaleFactor}px;
   color: ${(props) => props.$preferences.fontColor};
-  font-family: 'Courier New', monospace;
-  font-weight: 300;
+  font-family: ${(props) => props.$preferences.fontFamily};
+  font-weight: ${(props) => props.$preferences.fontWeight};
   letter-spacing: 0.05em;
   display: flex;
   flex-direction: column;
@@ -35,7 +35,6 @@ const TimeDisplay = styled.div`
   gap: 0.5rem;
   align-items: center;
   font-size: 1.5em;
-  font-weight: 200;
   line-height: 1;
 `;
 
@@ -49,7 +48,6 @@ const DigitGroup = styled.div`
 const DateDisplay = styled.div`
   font-size: 0.2em;
   opacity: 0.6;
-  font-weight: 300;
 `;
 
 export const TimeRenderer: React.FC<TimeRendererProps> = ({ 

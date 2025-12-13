@@ -10,6 +10,8 @@ describe('Settings Component - Epic 3: Customization Options', () => {
     backgroundColor: '#000000',
     showSeconds: false,
     flipStyle: 'drop-down',
+    fontFamily: 'Courier New, monospace',
+    fontWeight: 300,
   };
 
   const mockOnPreferencesChange = jest.fn();
@@ -40,6 +42,8 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           backgroundColor: '#000000',
           showSeconds: false,
           flipStyle: 'drop-down',
+          fontFamily: 'Courier New, monospace',
+          fontWeight: 300,
         });
       });
 
@@ -109,6 +113,8 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           backgroundColor: '#000000',
           showSeconds: false,
           flipStyle: 'drop-down',
+          fontFamily: 'Courier New, monospace',
+          fontWeight: 300,
         });
       });
 
@@ -130,6 +136,8 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           fontColor: '#FFFFFF',
           backgroundColor: '#000000',
           showSeconds: false,
+          fontFamily: 'Courier New, monospace',
+          fontWeight: 300,
           flipStyle: 'drop-down',
         });
       });
@@ -181,6 +189,8 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           backgroundColor: '#000000',
           showSeconds: false,
           flipStyle: 'drop-down',
+          fontFamily: 'Courier New, monospace',
+          fontWeight: 300,
         });
       });
 
@@ -203,6 +213,8 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           backgroundColor: '#0000ff',
           showSeconds: false,
           flipStyle: 'drop-down',
+          fontFamily: 'Courier New, monospace',
+          fontWeight: 300,
         });
       });
 
@@ -397,6 +409,8 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           backgroundColor: '#000000',
           showSeconds: true,
           flipStyle: 'drop-down',
+          fontFamily: 'Courier New, monospace',
+          fontWeight: 300,
         });
       });
 
@@ -476,6 +490,8 @@ describe('Settings Component - Epic 3: Customization Options', () => {
         fontColor: '#FFFFFF',
         backgroundColor: '#000000',
         showSeconds: false,
+        fontFamily: 'Courier New, monospace',
+        fontWeight: 300,
         flipStyle: 'drop-down',
       });
 
@@ -489,6 +505,8 @@ describe('Settings Component - Epic 3: Customization Options', () => {
         backgroundColor: '#000000',
         showSeconds: false,
         flipStyle: 'drop-down',
+        fontFamily: 'Courier New, monospace',
+        fontWeight: 300,
       });
 
       expect(mockOnPreferencesChange).toHaveBeenCalledTimes(2);
@@ -521,6 +539,8 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           backgroundColor: '#000000',
           showSeconds: false,
           flipStyle: 'classic-flip',
+          fontFamily: 'Courier New, monospace',
+          fontWeight: 300,
         });
       });
 
@@ -632,6 +652,8 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           backgroundColor: '#000000',
           showSeconds: false,
           flipStyle: 'card-fold',
+          fontFamily: 'Courier New, monospace',
+          fontWeight: 300,
         });
       });
 
@@ -652,6 +674,165 @@ describe('Settings Component - Epic 3: Customization Options', () => {
 
         const flipStyleSelect = screen.getByLabelText(/flip style/i) as HTMLSelectElement;
         expect(flipStyleSelect.value).toBe('card-fold');
+      });
+    });
+  });
+
+  describe('User Story 3.5: Change Font Family', () => {
+    describe('AC: Font family updates in real-time when changed', () => {
+      it('should call onPreferencesChange when font family select changes', () => {
+        const preferencesWithFont: UserPreferences = {
+          ...defaultPreferences,
+          fontFamily: 'Courier New, monospace',
+          fontWeight: 300,
+        };
+
+        render(
+          <Settings
+            preferences={preferencesWithFont}
+            onPreferencesChange={mockOnPreferencesChange}
+            isOpen={true}
+            onClose={mockOnClose}
+          />
+        );
+
+        const fontFamilySelect = screen.getByLabelText(/font family/i);
+        fireEvent.change(fontFamilySelect, { target: { value: 'Arial, sans-serif' } });
+
+        expect(mockOnPreferencesChange).toHaveBeenCalledWith({
+          fontSize: 120,
+          fontColor: '#FFFFFF',
+          backgroundColor: '#000000',
+          showSeconds: false,
+          flipStyle: 'drop-down',
+          fontFamily: 'Arial, sans-serif',
+          fontWeight: 300,
+        });
+      });
+
+      it('should display current font family in select', () => {
+        const preferencesWithFont: UserPreferences = {
+          ...defaultPreferences,
+          fontFamily: 'Georgia, serif',
+          fontWeight: 300,
+        };
+
+        render(
+          <Settings
+            preferences={preferencesWithFont}
+            onPreferencesChange={mockOnPreferencesChange}
+            isOpen={true}
+            onClose={mockOnClose}
+          />
+        );
+
+        const fontFamilySelect = screen.getByLabelText(/font family/i) as HTMLSelectElement;
+        expect(fontFamilySelect.value).toBe('Georgia, serif');
+      });
+
+      it('should have multiple font family options available', () => {
+        const preferencesWithFont: UserPreferences = {
+          ...defaultPreferences,
+          fontFamily: 'Courier New, monospace',
+          fontWeight: 300,
+        };
+
+        render(
+          <Settings
+            preferences={preferencesWithFont}
+            onPreferencesChange={mockOnPreferencesChange}
+            isOpen={true}
+            onClose={mockOnClose}
+          />
+        );
+
+        const fontFamilySelect = screen.getByLabelText(/font family/i);
+        const options = Array.from(fontFamilySelect.querySelectorAll('option')).map(opt => opt.value);
+        
+        expect(options).toContain('Courier New, monospace');
+        expect(options).toContain('Arial, sans-serif');
+        expect(options).toContain('Georgia, serif');
+        expect(options.length).toBeGreaterThan(3);
+      });
+    });
+  });
+
+  describe('User Story 3.6: Change Font Weight', () => {
+    describe('AC: Font weight updates in real-time when changed', () => {
+      it('should call onPreferencesChange when font weight select changes', () => {
+        const preferencesWithFont: UserPreferences = {
+          ...defaultPreferences,
+          fontFamily: 'Courier New, monospace',
+          fontWeight: 300,
+        };
+
+        render(
+          <Settings
+            preferences={preferencesWithFont}
+            onPreferencesChange={mockOnPreferencesChange}
+            isOpen={true}
+            onClose={mockOnClose}
+          />
+        );
+
+        const fontWeightSelect = screen.getByLabelText(/font weight/i);
+        fireEvent.change(fontWeightSelect, { target: { value: '700' } });
+
+        expect(mockOnPreferencesChange).toHaveBeenCalledWith({
+          fontSize: 120,
+          fontColor: '#FFFFFF',
+          backgroundColor: '#000000',
+          showSeconds: false,
+          flipStyle: 'drop-down',
+          fontFamily: 'Courier New, monospace',
+          fontWeight: 700,
+        });
+      });
+
+      it('should display current font weight in select', () => {
+        const preferencesWithFont: UserPreferences = {
+          ...defaultPreferences,
+          fontFamily: 'Courier New, monospace',
+          fontWeight: 600,
+        };
+
+        render(
+          <Settings
+            preferences={preferencesWithFont}
+            onPreferencesChange={mockOnPreferencesChange}
+            isOpen={true}
+            onClose={mockOnClose}
+          />
+        );
+
+        const fontWeightSelect = screen.getByLabelText(/font weight/i) as HTMLSelectElement;
+        expect(fontWeightSelect.value).toBe('600');
+      });
+
+      it('should have font weight options from 100 to 900', () => {
+        const preferencesWithFont: UserPreferences = {
+          ...defaultPreferences,
+          fontFamily: 'Courier New, monospace',
+          fontWeight: 300,
+        };
+
+        render(
+          <Settings
+            preferences={preferencesWithFont}
+            onPreferencesChange={mockOnPreferencesChange}
+            isOpen={true}
+            onClose={mockOnClose}
+          />
+        );
+
+        const fontWeightSelect = screen.getByLabelText(/font weight/i);
+        const options = Array.from(fontWeightSelect.querySelectorAll('option')).map(opt => parseInt(opt.value));
+        
+        expect(options).toContain(100);
+        expect(options).toContain(400);
+        expect(options).toContain(700);
+        expect(options).toContain(900);
+        expect(options.length).toBe(9);
       });
     });
   });

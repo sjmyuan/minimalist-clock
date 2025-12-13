@@ -16,7 +16,19 @@ describe('storage utils', () => {
         backgroundColor: '#000000',
         showSeconds: false,
         flipStyle: 'drop-down',
+        fontFamily: 'Courier New, monospace',
+        fontWeight: 300,
       });
+    });
+
+    it('should include fontFamily in defaults', () => {
+      const defaults = getDefaultPreferences();
+      expect(defaults.fontFamily).toBe('Courier New, monospace');
+    });
+
+    it('should include fontWeight in defaults', () => {
+      const defaults = getDefaultPreferences();
+      expect(defaults.fontWeight).toBe(300);
     });
   });
 
@@ -30,6 +42,8 @@ describe('storage utils', () => {
         backgroundColor: '#000000',
         showSeconds: false,
         flipStyle: 'drop-down',
+        fontFamily: 'Courier New, monospace',
+        fontWeight: 300,
       });
     });
 
@@ -45,6 +59,40 @@ describe('storage utils', () => {
       const prefs = loadPreferences();
       expect(prefs).toEqual(customPrefs);
     });
+
+    it('should load stored fontFamily preference', () => {
+      const customPrefs = {
+        fontSize: 48,
+        fontColor: '#FFFFFF',
+        backgroundColor: '#000000',
+        showSeconds: false,
+        flipStyle: 'drop-down' as const,
+        fontFamily: 'Arial, sans-serif',
+        fontWeight: 400,
+      };
+      
+      localStorage.setItem('userPreferences', JSON.stringify(customPrefs));
+      
+      const prefs = loadPreferences();
+      expect(prefs.fontFamily).toBe('Arial, sans-serif');
+    });
+
+    it('should load stored fontWeight preference', () => {
+      const customPrefs = {
+        fontSize: 48,
+        fontColor: '#FFFFFF',
+        backgroundColor: '#000000',
+        showSeconds: false,
+        flipStyle: 'drop-down' as const,
+        fontFamily: 'Courier New, monospace',
+        fontWeight: 700,
+      };
+      
+      localStorage.setItem('userPreferences', JSON.stringify(customPrefs));
+      
+      const prefs = loadPreferences();
+      expect(prefs.fontWeight).toBe(700);
+    });
   });
 
   describe('savePreferences', () => {
@@ -55,12 +103,48 @@ describe('storage utils', () => {
         backgroundColor: '#FFFFFF',
         showSeconds: true,
         flipStyle: 'classic-flip' as const,
+        fontFamily: 'Georgia, serif',
+        fontWeight: 600,
       };
       
       savePreferences(prefs);
       
       const stored = localStorage.getItem('userPreferences');
       expect(stored).toBe(JSON.stringify(prefs));
+    });
+
+    it('should persist fontFamily to localStorage', () => {
+      const prefs = {
+        fontSize: 48,
+        fontColor: '#FFFFFF',
+        backgroundColor: '#000000',
+        showSeconds: false,
+        flipStyle: 'drop-down' as const,
+        fontFamily: 'Times New Roman, serif',
+        fontWeight: 300,
+      };
+      
+      savePreferences(prefs);
+      
+      const stored = JSON.parse(localStorage.getItem('userPreferences') || '{}');
+      expect(stored.fontFamily).toBe('Times New Roman, serif');
+    });
+
+    it('should persist fontWeight to localStorage', () => {
+      const prefs = {
+        fontSize: 48,
+        fontColor: '#FFFFFF',
+        backgroundColor: '#000000',
+        showSeconds: false,
+        flipStyle: 'drop-down' as const,
+        fontFamily: 'Courier New, monospace',
+        fontWeight: 800,
+      };
+      
+      savePreferences(prefs);
+      
+      const stored = JSON.parse(localStorage.getItem('userPreferences') || '{}');
+      expect(stored.fontWeight).toBe(800);
     });
   });
 
@@ -72,6 +156,8 @@ describe('storage utils', () => {
         backgroundColor: '#0000FF',
         showSeconds: true,
         flipStyle: 'classic-flip' as const,
+        fontFamily: 'Arial, sans-serif',
+        fontWeight: 700,
       };
       
       savePreferences(customPrefs);
@@ -84,6 +170,8 @@ describe('storage utils', () => {
         backgroundColor: '#000000',
         showSeconds: false,
         flipStyle: 'drop-down',
+        fontFamily: 'Courier New, monospace',
+        fontWeight: 300,
       });
       expect(localStorage.getItem('userPreferences')).toBeNull();
     });

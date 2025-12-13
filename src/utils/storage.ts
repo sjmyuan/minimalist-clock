@@ -8,6 +8,8 @@ const defaultPreferences: UserPreferences = {
   backgroundColor: '#000000',
   showSeconds: false,
   flipStyle: 'drop-down',
+  fontFamily: 'Courier New, monospace',
+  fontWeight: 300,
 };
 
 /**
