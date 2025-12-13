@@ -138,84 +138,49 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
   // Determine if we should pass digit props (only for card-fold style)
   const shouldPassDigits = preferences.flipStyle === 'card-fold';
 
+  const renderDigitContent = (digit: string) => (
+    <DigitWrapper>
+      <span>{digit}</span>
+    </DigitWrapper>
+  );
+
+  const renderDigit = (
+    digit: string, 
+    prevDigit: string, 
+    shouldAnimate: boolean, 
+    key: string
+  ) => (
+    <AnimationHandler 
+      key={key}
+      trigger={shouldAnimate} 
+      flipStyle={preferences.flipStyle}
+      oldDigit={shouldPassDigits ? prevDigit : undefined}
+      newDigit={shouldPassDigits ? digit : undefined}
+      backgroundColor={preferences.backgroundColor}
+      renderContent={renderDigitContent}
+    >
+      {renderDigitContent(digit)}
+    </AnimationHandler>
+  );
+
   return (
     <TimeContainer $preferences={preferences} $scaleFactor={scaleFactor}>
       <TimeDisplay data-testid="time-display">
         <DigitGroup>
-          <AnimationHandler 
-            trigger={shouldAnimateDigit0} 
-            flipStyle={preferences.flipStyle}
-            oldDigit={shouldPassDigits ? prevHourStringRef.current[0] : undefined}
-            newDigit={shouldPassDigits ? hourString[0] : undefined}
-            backgroundColor={preferences.backgroundColor}
-          >
-            <DigitWrapper>
-              <span>{hourString[0]}</span>
-            </DigitWrapper>
-          </AnimationHandler>
-          <AnimationHandler 
-            trigger={shouldAnimateDigit1} 
-            flipStyle={preferences.flipStyle}
-            oldDigit={shouldPassDigits ? prevHourStringRef.current[1] : undefined}
-            newDigit={shouldPassDigits ? hourString[1] : undefined}
-            backgroundColor={preferences.backgroundColor}
-          >
-            <DigitWrapper>
-              <span>{hourString[1]}</span>
-            </DigitWrapper>
-          </AnimationHandler>
+          {renderDigit(hourString[0], prevHourStringRef.current[0], shouldAnimateDigit0, 'h0')}
+          {renderDigit(hourString[1], prevHourStringRef.current[1], shouldAnimateDigit1, 'h1')}
         </DigitGroup>
         <span>:</span>
         <DigitGroup>
-          <AnimationHandler 
-            trigger={shouldAnimateDigit2} 
-            flipStyle={preferences.flipStyle}
-            oldDigit={shouldPassDigits ? prevMinuteStringRef.current[0] : undefined}
-            newDigit={shouldPassDigits ? minuteString[0] : undefined}
-            backgroundColor={preferences.backgroundColor}
-          >
-            <DigitWrapper>
-              <span>{minuteString[0]}</span>
-            </DigitWrapper>
-          </AnimationHandler>
-          <AnimationHandler 
-            trigger={shouldAnimateDigit3} 
-            flipStyle={preferences.flipStyle}
-            oldDigit={shouldPassDigits ? prevMinuteStringRef.current[1] : undefined}
-            newDigit={shouldPassDigits ? minuteString[1] : undefined}
-            backgroundColor={preferences.backgroundColor}
-          >
-            <DigitWrapper>
-              <span>{minuteString[1]}</span>
-            </DigitWrapper>
-          </AnimationHandler>
+          {renderDigit(minuteString[0], prevMinuteStringRef.current[0], shouldAnimateDigit2, 'm0')}
+          {renderDigit(minuteString[1], prevMinuteStringRef.current[1], shouldAnimateDigit3, 'm1')}
         </DigitGroup>
         {preferences.showSeconds && (
           <>
             <span>:</span>
             <DigitGroup>
-              <AnimationHandler 
-                trigger={shouldAnimateDigit4} 
-                flipStyle={preferences.flipStyle}
-                oldDigit={shouldPassDigits ? prevSecondStringRef.current[0] : undefined}
-                newDigit={shouldPassDigits ? secondString[0] : undefined}
-                backgroundColor={preferences.backgroundColor}
-              >
-                <DigitWrapper>
-                  <span>{secondString[0]}</span>
-                </DigitWrapper>
-              </AnimationHandler>
-              <AnimationHandler 
-                trigger={shouldAnimateDigit5} 
-                flipStyle={preferences.flipStyle}
-                oldDigit={shouldPassDigits ? prevSecondStringRef.current[1] : undefined}
-                newDigit={shouldPassDigits ? secondString[1] : undefined}
-                backgroundColor={preferences.backgroundColor}
-              >
-                <DigitWrapper>
-                  <span>{secondString[1]}</span>
-                </DigitWrapper>
-              </AnimationHandler>
+              {renderDigit(secondString[0], prevSecondStringRef.current[0], shouldAnimateDigit4, 's0')}
+              {renderDigit(secondString[1], prevSecondStringRef.current[1], shouldAnimateDigit5, 's1')}
             </DigitGroup>
           </>
         )}

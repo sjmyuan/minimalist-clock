@@ -35,6 +35,8 @@ export const ClockDisplay: React.FC<ClockDisplayProps> = ({ preferences }) => {
   const [shouldAnimateDigit4, setShouldAnimateDigit4] = React.useState(false); // second tens
   const [shouldAnimateDigit5, setShouldAnimateDigit5] = React.useState(false); // second ones
 
+  const lastTimeRef = React.useRef<TimeObject>(time);
+
   React.useEffect(() => {
     const updateTime = () => {
       const now = new Date();
@@ -50,12 +52,14 @@ export const ClockDisplay: React.FC<ClockDisplayProps> = ({ preferences }) => {
         }),
       };
 
+      const lastTime = lastTimeRef.current;
+
       // Format old and new time to compare individual digits
-      const oldHourString = time.hours.toString().padStart(2, '0');
+      const oldHourString = lastTime.hours.toString().padStart(2, '0');
       const newHourString = newTime.hours.toString().padStart(2, '0');
-      const oldMinuteString = time.minutes.toString().padStart(2, '0');
+      const oldMinuteString = lastTime.minutes.toString().padStart(2, '0');
       const newMinuteString = newTime.minutes.toString().padStart(2, '0');
-      const oldSecondString = time.seconds.toString().padStart(2, '0');
+      const oldSecondString = lastTime.seconds.toString().padStart(2, '0');
       const newSecondString = newTime.seconds.toString().padStart(2, '0');
 
       // Check each digit independently
@@ -90,13 +94,14 @@ export const ClockDisplay: React.FC<ClockDisplayProps> = ({ preferences }) => {
       }
 
       setTime(newTime);
+      lastTimeRef.current = newTime;
     };
 
     updateTime();
     const interval = setInterval(updateTime, 1000);
 
     return () => clearInterval(interval);
-  }, [time.hours, time.minutes, time.seconds]);
+  }, []);
 
   return (
     <ClockContainer $backgroundColor={preferences.backgroundColor}>

@@ -134,7 +134,7 @@ The rules section outlines decision criteria that determine which skills to appl
 <rule> If the user submits a refactoring request, apply the **defining-refactor-request** skill to clarify the scope, objectives, and constraints of the refactor request. </rule>
 <rule> After clarifying the scope, objectives and constraints of the refactor request, apply the **refactor-planning** skill to generate a refactor plan. </rule>
 
-<rule> If the user reports a bug or bug-fixing does not work as intended, apply the **identifying-bug-root-cause** skill to identify the root cause of the bug. </rule>
+<rule> If the user reports a bug, apply the **identifying-bug-root-cause** skill to identify the root cause of the bug. </rule>
 <rule> After identifying the root cause of the bug, apply the **bug-fixing-planning** skill to generate a bug-fixing plan. </rule>
 
 <rule> After completing the implementation, refactor, or bug-fixing plan, update the epics, stories and ACs in requirements.md to reflect the requirement changes and update architecture.md to reflect the design changes. </rule>
