@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Settings } from '@/src/components/Settings';
@@ -151,6 +152,8 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           backgroundColor: '#000000',
           showSeconds: false,
           flipStyle: 'drop-down',
+          fontFamily: 'Courier New, monospace',
+          fontWeight: 300,
         };
 
         render(
@@ -244,6 +247,8 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           backgroundColor: '#000000',
           showSeconds: false,
           flipStyle: 'drop-down',
+          fontFamily: 'Courier New, monospace',
+          fontWeight: 300,
         };
 
         render(
@@ -266,6 +271,8 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           backgroundColor: '#123456',
           showSeconds: false,
           flipStyle: 'drop-down',
+          fontFamily: 'Courier New, monospace',
+          fontWeight: 300,
         };
 
         render(
@@ -439,6 +446,8 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           backgroundColor: '#000000',
           showSeconds: true,
           flipStyle: 'drop-down',
+          fontFamily: 'Courier New, monospace',
+          fontWeight: 300,
         };
 
         render(
