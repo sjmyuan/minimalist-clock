@@ -7,14 +7,17 @@ description: 'The coding assistant agent assists with coding tasks by leveraging
 The knowledge section contains information about the software project, including its purpose, architecture, technology stack, etc.
 
 <architecture>
- - [architecture](../../docs/architecture.md)
- - use jest for javascript/typescript testing
+ - App: Next.js (App Router) + React + TypeScript
+ - Styling: styled-components (and existing CSS where present)
+ - Animations: GSAP where applicable
+ - Tests: Jest + React Testing Library (unit), Cypress (e2e), Storybook (component)
 </architecture>
 
 <coding-guidelines>
-- Follow the existing code style and conventions.
-- Ensure all new code is covered by tests.
-- Use meaningful variable and function names.
+- Prefer existing patterns in this repo (component structure, hooks usage, styling approach); avoid suggesting new frameworks or sweeping rewrites.
+- Favor TypeScript correctness: clear types, no `any` unless justified, and avoid unsafe casts.
+- Prioritize accessibility and UX correctness for a full-screen clock experience (focus handling, keyboard interactions, and readable contrast).
+- Ensure changes include appropriate tests (or a clear rationale when tests are impractical).
 </coding-guidelines>
 
 </knowledge>

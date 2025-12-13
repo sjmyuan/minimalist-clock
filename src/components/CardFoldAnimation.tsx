@@ -13,6 +13,61 @@ interface CardFoldAnimationProps {
   renderContent: (digit: string) => React.ReactNode;
 }
 
+const DigitWrapper = styled.div`
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3em 0.4em;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.15em;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  min-width: 0.8em;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(0, 0, 0, 0.3) 10%, 
+      rgba(0, 0, 0, 0.3) 90%, 
+      transparent 100%
+    );
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+  
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(255, 255, 255, 0.1) 10%, 
+      rgba(255, 255, 255, 0.1) 90%, 
+      transparent 100%
+    );
+    transform: translateY(calc(-50% + 1px));
+    z-index: 2;
+  }
+  
+  span {
+    position: relative;
+    z-index: 1;
+  }
+`;
+
 const FlipCardContainer = styled.div`
   position: relative;
   transform-style: preserve-3d;
@@ -159,12 +214,12 @@ export const CardFoldAnimation: React.FC<CardFoldAnimationProps> = ({
     }
   }, [trigger, duration, oldDigit, newDigit]);
 
-  const oldDigitContent = renderContent(oldDigit);
-  const overlayContent = renderContent(overlayDigit);
-  const bottomCardContent = renderContent(bottomCardDigit);
+  const oldDigitContent = <DigitWrapper>{renderContent(oldDigit)}</DigitWrapper>;
+  const overlayContent = <DigitWrapper>{renderContent(overlayDigit)}</DigitWrapper>;
+  const bottomCardContent = <DigitWrapper>{renderContent(bottomCardDigit)}</DigitWrapper>;
   // Use newDigit for the height reference to ensure container size is correct for the incoming digit
   // (though usually digits are monospaced/same size)
-  const displayContent = renderContent(newDigit);
+  const displayContent = <DigitWrapper>{renderContent(newDigit)}</DigitWrapper>;
 
   return (
     <FlipCardContainer ref={containerRef}>
