@@ -35,6 +35,10 @@ export const Open: Story = {
       fontSize: 120,
       fontColor: '#FFFFFF',
       backgroundColor: '#000000',
+      showSeconds: false,
+      flipStyle: 'drop-down',
+      fontFamily: 'Courier New, monospace',
+      fontWeight: 300,
     },
   },
 };
@@ -48,6 +52,10 @@ export const Closed: Story = {
       fontSize: 120,
       fontColor: '#FFFFFF',
       backgroundColor: '#000000',
+      showSeconds: false,
+      flipStyle: 'drop-down',
+      fontFamily: 'Courier New, monospace',
+      fontWeight: 300,
     },
   },
 };

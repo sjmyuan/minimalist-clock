@@ -45,6 +45,8 @@ export default function Home() {
     backgroundColor: '#000000',
     showSeconds: false,
     flipStyle: 'drop-down',
+    fontFamily: 'Courier New, monospace',
+    fontWeight: 300,
   });
   const [isSettingsOpen, setIsSettingsOpen] = React.useState(false);
   const { isFullscreen, toggleFullscreen } = useFullscreen();
