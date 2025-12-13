@@ -4,6 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { TimeObject, UserPreferences } from '@/src/types';
 import { AnimationHandler } from './AnimationHandler';
+import { usePrevious } from '@/src/utils/usePrevious';
 
 interface TimeRendererProps {
   time: TimeObject;
@@ -124,16 +125,9 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
   const secondString = formatTime(time.seconds);
 
   // Track previous digit values for physical flip clock animation
-  const prevHourStringRef = React.useRef(hourString);
-  const prevMinuteStringRef = React.useRef(minuteString);
-  const prevSecondStringRef = React.useRef(secondString);
-
-  // Store current values as previous for next render
-  React.useEffect(() => {
-    prevHourStringRef.current = hourString;
-    prevMinuteStringRef.current = minuteString;
-    prevSecondStringRef.current = secondString;
-  });
+  const prevHourString = usePrevious(hourString) ?? hourString;
+  const prevMinuteString = usePrevious(minuteString) ?? minuteString;
+  const prevSecondString = usePrevious(secondString) ?? secondString;
 
   // Determine if we should pass digit props (only for card-fold style)
   const shouldPassDigits = preferences.flipStyle === 'card-fold';
@@ -167,20 +161,20 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
     <TimeContainer $preferences={preferences} $scaleFactor={scaleFactor}>
       <TimeDisplay data-testid="time-display">
         <DigitGroup>
-          {renderDigit(hourString[0], prevHourStringRef.current[0], shouldAnimateDigit0, 'h0')}
-          {renderDigit(hourString[1], prevHourStringRef.current[1], shouldAnimateDigit1, 'h1')}
+          {renderDigit(hourString[0], prevHourString[0], shouldAnimateDigit0, 'h0')}
+          {renderDigit(hourString[1], prevHourString[1], shouldAnimateDigit1, 'h1')}
         </DigitGroup>
         <span>:</span>
         <DigitGroup>
-          {renderDigit(minuteString[0], prevMinuteStringRef.current[0], shouldAnimateDigit2, 'm0')}
-          {renderDigit(minuteString[1], prevMinuteStringRef.current[1], shouldAnimateDigit3, 'm1')}
+          {renderDigit(minuteString[0], prevMinuteString[0], shouldAnimateDigit2, 'm0')}
+          {renderDigit(minuteString[1], prevMinuteString[1], shouldAnimateDigit3, 'm1')}
         </DigitGroup>
         {preferences.showSeconds && (
           <>
             <span>:</span>
             <DigitGroup>
-              {renderDigit(secondString[0], prevSecondStringRef.current[0], shouldAnimateDigit4, 's0')}
-              {renderDigit(secondString[1], prevSecondStringRef.current[1], shouldAnimateDigit5, 's1')}
+              {renderDigit(secondString[0], prevSecondString[0], shouldAnimateDigit4, 's0')}
+              {renderDigit(secondString[1], prevSecondString[1], shouldAnimateDigit5, 's1')}
             </DigitGroup>
           </>
         )}
