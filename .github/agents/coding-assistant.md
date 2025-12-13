@@ -55,6 +55,7 @@ The skills section describes additional capabilities that you can refer to, incl
   - **Verify Implementation**, Re-run the tests to confirm that the implemented code passes all test cases successfully. Debug and refine as necessary.  
   - **Refactor**, Improve the code’s structure, readability, and performance while maintaining functionality, ensuring no tests break during the process.  
   - **Validate Refactoring**, Run the tests again after refactoring to ensure the updated code still passes all test cases without introducing regressions.
+  - **Validate Linting and Formatting**, Run linting and formatting tools to ensure code quality and adherence to coding standards.
 - Summarize the plan back to the user and ask for confirmation or corrections. for example:
   """
   To implement the requirement of [requirement summary], the plan is as follows:
@@ -64,12 +65,14 @@ The skills section describes additional capabilities that you can refer to, incl
   - Step 4: Verify Implementation for functionality A
   - Step 5: Refactor code related to functionality A
   - Step 6: Validate Refactoring for functionality A
-  - Step 7: Write Focused Tests for functionality B
-  - Step 8: Confirm Test Failure for functionality B
-  - Step 9: Implement Minimal Code for functionality B
-  - Step 10: Verify Implementation for functionality B
-  - Step 11: Refactor code related to functionality B
-  - Step 12: Validate Refactoring for functionality B
+  - Step 7: Validate Linting and Formatting for functionality A
+  - Step 8: Write Focused Tests for functionality B
+  - Step 9: Confirm Test Failure for functionality B
+  - Step 10: Implement Minimal Code for functionality B
+  - Step 11: Verify Implementation for functionality B
+  - Step 12: Refactor code related to functionality B
+  - Step 13: Validate Refactoring for functionality B
+  - Step 14: Validate Linting and Formatting for functionality B
   - ... 
 
   Does this plan align with your expectations?
@@ -84,6 +87,7 @@ The skills section describes additional capabilities that you can refer to, incl
   - **Confirm Test Failure**: Execute the tests to verify they fail initially, validating that the tests correctly identify the current code behavior before refactoring begins.
   - **Refactor Code**: Modify the minimum amount of code necessary to pass the tests while achieving the refactoring objective, avoiding over-engineering or introducing unrelated changes.
   - **Verify Refactor**: Re-run all tests to confirm the refactored code passes successfully. Debug and refine as necessary to ensure correctness.
+  - **Validate Linting and Formatting**: Run linting and formatting tools to ensure code quality and adherence to coding standards.
 - Summarize the complete plan to the user and request confirmation or corrections. For example:
   """
   To complete the refactoring request of [refactor request summary], the plan is as follows:
@@ -91,10 +95,12 @@ The skills section describes additional capabilities that you can refer to, incl
   - Step 2: Confirm Test Failure for refactor objective A
   - Step 3: Refactor Code for refactor objective A
   - Step 4: Verify Refactor for refactor objective A
-  - Step 5: Write Focused Tests for refactor objective B
-  - Step 6: Confirm Test Failure for refactor objective B
-  - Step 7: Refactor Code for refactor objective B
-  - Step 8: Verify Refactor for refactor objective B
+  - Step 5: Validate Linting and Formatting for refactor objective A
+  - Step 6: Write Focused Tests for refactor objective B
+  - Step 7: Confirm Test Failure for refactor objective B
+  - Step 8: Refactor Code for refactor objective B
+  - Step 9: Verify Refactor for refactor objective B
+  - Step 10: Validate Linting and Formatting for refactor objective B
   - ... 
   
   Does this plan align with your expectations?
@@ -109,6 +115,7 @@ The skills section describes additional capabilities that you can refer to, incl
   - **Confirm Test Failure**: Execute the tests to verify they fail initially, validating that the tests correctly identify the current code behavior before fixing begins.
   - **Fix Code**: Modify the minimum amount of code necessary to pass the tests while addressing the bug, avoiding over-engineering or introducing unrelated changes.
   - **Verify Fix**: Re-run all tests to confirm the fix works successfully. Debug and refine as necessary to ensure correctness.
+  - **Validate Linting and Formatting**: Run linting and formatting tools to ensure code quality and adherence to coding standards.
 - Summarize the complete plan to the user and request confirmation or corrections. For example:
   """
   To fix the bug of [bug summary], the plan is as follows:
@@ -116,10 +123,12 @@ The skills section describes additional capabilities that you can refer to, incl
   - Step 2: Confirm Test Failure for issue A
   - Step 3: Fix Code for issue A
   - Step 4: Verify Fix for issue A
-  - Step 5: Write Focused Tests for issue B
-  - Step 6: Confirm Test Failure for issue B
-  - Step 7: Fix Code for issue B
-  - Step 8: Verify Fix for issue B
+  - Step 5: Validate Linting and Formatting for issue A
+  - Step 6: Write Focused Tests for issue B
+  - Step 7: Confirm Test Failure for issue B
+  - Step 8: Fix Code for issue B
+  - Step 9: Verify Fix for issue B
+  - Step 10: Validate Linting and Formatting for issue B
   - ...
   Does this plan align with your expectations?
   """
@@ -130,6 +139,8 @@ The skills section describes additional capabilities that you can refer to, incl
 <rules>
 
 The rules section outlines decision criteria that determine which skills to apply based on the current context and user inputs.
+
+<rule> Identify whether the user input is a requirement, refactor request, or bug report. </rule>
 
 <rule> If user submit a requirement, apply the **defining-requirement** skill to clarify and structure it. </rule>
 <rule> After defining the requirement, apply the **implementation-planning** skill to generate an implementation plan. </rule>
