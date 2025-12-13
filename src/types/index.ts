@@ -28,6 +28,7 @@ export interface UserPreferences {
   flipStyle: FlipStyle;
   fontFamily: string;
   fontWeight: number;
+  use24HourFormat: boolean;
 }
 
 /**

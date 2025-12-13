@@ -47,6 +47,7 @@ export default function Home() {
     flipStyle: 'drop-down',
     fontFamily: 'Courier New, monospace',
     fontWeight: 300,
+    use24HourFormat: true,
   });
   const [isSettingsOpen, setIsSettingsOpen] = React.useState(false);
   const { isFullscreen, toggleFullscreen } = useFullscreen();

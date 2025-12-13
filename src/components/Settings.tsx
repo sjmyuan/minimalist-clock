@@ -188,6 +188,19 @@ export const Settings: React.FC<SettingsProps> = ({
           <option value="900">900 - Black</option>
         </Input>
       </SettingGroup>
+
+      <SettingGroup>
+        <Label htmlFor="timeFormat">Time Format</Label>
+        <Input
+          as="select"
+          id="timeFormat"
+          value={String(preferences.use24HourFormat)}
+          onChange={(e) => handleChange('use24HourFormat', e.target.value === 'true')}
+        >
+          <option value="true">24 Hour</option>
+          <option value="false">12 Hour (AM/PM)</option>
+        </Input>
+      </SettingGroup>
     </SettingsOverlay>
   );
 };

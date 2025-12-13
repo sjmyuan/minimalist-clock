@@ -54,9 +54,22 @@ export const ClockDisplay: React.FC<ClockDisplayProps> = ({ preferences }) => {
 
       const lastTime = lastTimeRef.current;
 
-      // Format old and new time to compare individual digits
-      const oldHourString = lastTime.hours.toString().padStart(2, '0');
-      const newHourString = newTime.hours.toString().padStart(2, '0');
+      // Convert hours to display format if needed
+      const convert24To12 = (hours: number): number => {
+        if (hours === 0) return 12;
+        if (hours <= 12) return hours;
+        return hours - 12;
+      };
+
+      const getDisplayHours = (hours: number): number => {
+        return preferences.use24HourFormat ? hours : convert24To12(hours);
+      };
+
+      // Format old and new time to compare individual digits (using display format)
+      const oldDisplayHours = getDisplayHours(lastTime.hours);
+      const newDisplayHours = getDisplayHours(newTime.hours);
+      const oldHourString = oldDisplayHours.toString().padStart(2, '0');
+      const newHourString = newDisplayHours.toString().padStart(2, '0');
       const oldMinuteString = lastTime.minutes.toString().padStart(2, '0');
       const newMinuteString = newTime.minutes.toString().padStart(2, '0');
       const oldSecondString = lastTime.seconds.toString().padStart(2, '0');
@@ -97,11 +110,33 @@ export const ClockDisplay: React.FC<ClockDisplayProps> = ({ preferences }) => {
       lastTimeRef.current = newTime;
     };
 
+    // Immediately update time when format or flip style changes
     updateTime();
     const interval = setInterval(updateTime, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [preferences.use24HourFormat, preferences.flipStyle]);
+
+  // Force immediate re-render when time format or flip style changes
+  React.useEffect(() => {
+    // Trigger animation for all digits when format or flip style changes
+    setShouldAnimateDigit0(true);
+    setShouldAnimateDigit1(true);
+    setShouldAnimateDigit2(true);
+    setShouldAnimateDigit3(true);
+    if (preferences.showSeconds) {
+      setShouldAnimateDigit4(true);
+      setShouldAnimateDigit5(true);
+    }
+    setTimeout(() => {
+      setShouldAnimateDigit0(false);
+      setShouldAnimateDigit1(false);
+      setShouldAnimateDigit2(false);
+      setShouldAnimateDigit3(false);
+      setShouldAnimateDigit4(false);
+      setShouldAnimateDigit5(false);
+    }, 100);
+  }, [preferences.use24HourFormat, preferences.flipStyle, preferences.showSeconds]);
 
   return (
     <ClockContainer $backgroundColor={preferences.backgroundColor}>

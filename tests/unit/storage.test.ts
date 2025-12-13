@@ -18,6 +18,7 @@ describe('storage utils', () => {
         flipStyle: 'drop-down',
         fontFamily: 'Courier New, monospace',
         fontWeight: 300,
+        use24HourFormat: true,
       });
     });
 
@@ -44,6 +45,7 @@ describe('storage utils', () => {
         flipStyle: 'drop-down',
         fontFamily: 'Courier New, monospace',
         fontWeight: 300,
+        use24HourFormat: true,
       });
     });
 
@@ -172,6 +174,7 @@ describe('storage utils', () => {
         flipStyle: 'drop-down',
         fontFamily: 'Courier New, monospace',
         fontWeight: 300,
+        use24HourFormat: true,
       });
       expect(localStorage.getItem('userPreferences')).toBeNull();
     });

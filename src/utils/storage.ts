@@ -10,6 +10,7 @@ const defaultPreferences: UserPreferences = {
   flipStyle: 'drop-down',
   fontFamily: 'Courier New, monospace',
   fontWeight: 300,
+  use24HourFormat: true,
 };
 
 /**

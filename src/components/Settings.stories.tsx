@@ -39,6 +39,7 @@ export const Open: Story = {
       flipStyle: 'drop-down',
       fontFamily: 'Courier New, monospace',
       fontWeight: 300,
+      use24HourFormat: true,
     },
   },
 };
@@ -56,6 +57,7 @@ export const Closed: Story = {
       flipStyle: 'drop-down',
       fontFamily: 'Courier New, monospace',
       fontWeight: 300,
+      use24HourFormat: true,
     },
   },
 };

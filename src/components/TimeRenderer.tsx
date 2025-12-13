@@ -50,6 +50,13 @@ const DateDisplay = styled.div`
   opacity: 0.6;
 `;
 
+const AmPmIndicator = styled.div`
+  font-size: 0.4em;
+  opacity: 0.8;
+  margin-left: 0.5em;
+  align-self: center;
+`;
+
 export const TimeRenderer: React.FC<TimeRendererProps> = ({ 
   time, 
   preferences,
@@ -65,7 +72,28 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
     return value.toString().padStart(2, '0');
   };
 
-  const hourString = formatTime(time.hours);
+  // Convert 24-hour format to 12-hour format if needed
+  const convert24To12 = (hours: number): { hours: number; period: 'AM' | 'PM' } => {
+    if (hours === 0) {
+      return { hours: 12, period: 'AM' };
+    } else if (hours < 12) {
+      return { hours, period: 'AM' };
+    } else if (hours === 12) {
+      return { hours: 12, period: 'PM' };
+    } else {
+      return { hours: hours - 12, period: 'PM' };
+    }
+  };
+
+  const displayHours = preferences.use24HourFormat 
+    ? time.hours 
+    : convert24To12(time.hours).hours;
+  
+  const amPmPeriod = preferences.use24HourFormat 
+    ? null 
+    : convert24To12(time.hours).period;
+
+  const hourString = formatTime(displayHours);
   const minuteString = formatTime(time.minutes);
   const secondString = formatTime(time.seconds);
 
@@ -114,6 +142,11 @@ export const TimeRenderer: React.FC<TimeRendererProps> = ({
               {renderDigit(secondString[1], prevSecondString[1], shouldAnimateDigit5, 's1')}
             </DigitGroup>
           </>
+        )}
+        {amPmPeriod && (
+          <AmPmIndicator data-testid="am-pm-indicator">
+            {amPmPeriod}
+          </AmPmIndicator>
         )}
       </TimeDisplay>
       <DateDisplay>{time.date}</DateDisplay>

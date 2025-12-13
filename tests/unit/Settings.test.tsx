@@ -13,6 +13,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
     flipStyle: 'drop-down',
     fontFamily: 'Courier New, monospace',
     fontWeight: 300,
+    use24HourFormat: true,
   };
 
   const mockOnPreferencesChange = jest.fn();
@@ -45,6 +46,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           flipStyle: 'drop-down',
           fontFamily: 'Courier New, monospace',
           fontWeight: 300,
+          use24HourFormat: true,
         });
       });
 
@@ -116,6 +118,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           flipStyle: 'drop-down',
           fontFamily: 'Courier New, monospace',
           fontWeight: 300,
+          use24HourFormat: true,
         });
       });
 
@@ -140,6 +143,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           fontFamily: 'Courier New, monospace',
           fontWeight: 300,
           flipStyle: 'drop-down',
+          use24HourFormat: true,
         });
       });
     });
@@ -193,8 +197,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           showSeconds: false,
           flipStyle: 'drop-down',
           fontFamily: 'Courier New, monospace',
-          fontWeight: 300,
-        });
+          fontWeight: 300,          use24HourFormat: true,        });
       });
 
       it('should call onPreferencesChange when background color changes', () => {
@@ -218,6 +221,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           flipStyle: 'drop-down',
           fontFamily: 'Courier New, monospace',
           fontWeight: 300,
+          use24HourFormat: true,
         });
       });
 
@@ -418,6 +422,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           flipStyle: 'drop-down',
           fontFamily: 'Courier New, monospace',
           fontWeight: 300,
+          use24HourFormat: true,
         });
       });
 
@@ -502,6 +507,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
         fontFamily: 'Courier New, monospace',
         fontWeight: 300,
         flipStyle: 'drop-down',
+        use24HourFormat: true,
       });
 
       // Change font color
@@ -516,6 +522,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
         flipStyle: 'drop-down',
         fontFamily: 'Courier New, monospace',
         fontWeight: 300,
+        use24HourFormat: true,
       });
 
       expect(mockOnPreferencesChange).toHaveBeenCalledTimes(2);
@@ -550,6 +557,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           flipStyle: 'classic-flip',
           fontFamily: 'Courier New, monospace',
           fontWeight: 300,
+          use24HourFormat: true,
         });
       });
 
@@ -663,6 +671,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           flipStyle: 'card-fold',
           fontFamily: 'Courier New, monospace',
           fontWeight: 300,
+          use24HourFormat: true,
         });
       });
 
@@ -716,6 +725,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           flipStyle: 'drop-down',
           fontFamily: 'Arial, sans-serif',
           fontWeight: 300,
+          use24HourFormat: true,
         });
       });
 
@@ -794,7 +804,7 @@ describe('Settings Component - Epic 3: Customization Options', () => {
           showSeconds: false,
           flipStyle: 'drop-down',
           fontFamily: 'Courier New, monospace',
-          fontWeight: 700,
+          fontWeight: 700,          use24HourFormat: true,          use24HourFormat: true,
         });
       });
 
@@ -842,6 +852,110 @@ describe('Settings Component - Epic 3: Customization Options', () => {
         expect(options).toContain(700);
         expect(options).toContain(900);
         expect(options.length).toBe(9);
+      });
+    });
+  });
+
+  describe('User Story 3.7: Time Format Selection', () => {
+    describe('AC: User can select between 24H and 12H time format', () => {
+      it('should render time format dropdown', () => {
+        render(
+          <Settings
+            preferences={{ ...defaultPreferences, use24HourFormat: true }}
+            onPreferencesChange={mockOnPreferencesChange}
+            isOpen={true}
+            onClose={mockOnClose}
+          />
+        );
+
+        const timeFormatSelect = screen.getByLabelText(/time format/i);
+        expect(timeFormatSelect).toBeInTheDocument();
+      });
+
+      it('should have 24H and 12H options', () => {
+        render(
+          <Settings
+            preferences={{ ...defaultPreferences, use24HourFormat: true }}
+            onPreferencesChange={mockOnPreferencesChange}
+            isOpen={true}
+            onClose={mockOnClose}
+          />
+        );
+
+        const timeFormatSelect = screen.getByLabelText(/time format/i);
+        const options = Array.from(timeFormatSelect.querySelectorAll('option')).map(
+          (option) => option.textContent
+        );
+
+        expect(options).toContain('24 Hour');
+        expect(options).toContain('12 Hour (AM/PM)');
+        expect(options.length).toBe(2);
+      });
+
+      it('should display 24H as selected when use24HourFormat is true', () => {
+        render(
+          <Settings
+            preferences={{ ...defaultPreferences, use24HourFormat: true }}
+            onPreferencesChange={mockOnPreferencesChange}
+            isOpen={true}
+            onClose={mockOnClose}
+          />
+        );
+
+        const timeFormatSelect = screen.getByLabelText(/time format/i) as HTMLSelectElement;
+        expect(timeFormatSelect.value).toBe('true');
+      });
+
+      it('should display 12H as selected when use24HourFormat is false', () => {
+        render(
+          <Settings
+            preferences={{ ...defaultPreferences, use24HourFormat: false }}
+            onPreferencesChange={mockOnPreferencesChange}
+            isOpen={true}
+            onClose={mockOnClose}
+          />
+        );
+
+        const timeFormatSelect = screen.getByLabelText(/time format/i) as HTMLSelectElement;
+        expect(timeFormatSelect.value).toBe('false');
+      });
+
+      it('should call onPreferencesChange with true when 24H is selected', () => {
+        render(
+          <Settings
+            preferences={{ ...defaultPreferences, use24HourFormat: false }}
+            onPreferencesChange={mockOnPreferencesChange}
+            isOpen={true}
+            onClose={mockOnClose}
+          />
+        );
+
+        const timeFormatSelect = screen.getByLabelText(/time format/i);
+        fireEvent.change(timeFormatSelect, { target: { value: 'true' } });
+
+        expect(mockOnPreferencesChange).toHaveBeenCalledWith({
+          ...defaultPreferences,
+          use24HourFormat: true,
+        });
+      });
+
+      it('should call onPreferencesChange with false when 12H is selected', () => {
+        render(
+          <Settings
+            preferences={{ ...defaultPreferences, use24HourFormat: true }}
+            onPreferencesChange={mockOnPreferencesChange}
+            isOpen={true}
+            onClose={mockOnClose}
+          />
+        );
+
+        const timeFormatSelect = screen.getByLabelText(/time format/i);
+        fireEvent.change(timeFormatSelect, { target: { value: 'false' } });
+
+        expect(mockOnPreferencesChange).toHaveBeenCalledWith({
+          ...defaultPreferences,
+          use24HourFormat: false,
+        });
       });
     });
   });
