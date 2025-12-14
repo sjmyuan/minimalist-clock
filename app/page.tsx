@@ -5,6 +5,7 @@ import { ClockDisplay, Settings, FullscreenButton } from '@/src/components';
 import { loadPreferences, savePreferences, useFullscreen, useUserActivity } from '@/src/utils';
 import { UserPreferences } from '@/src/types';
 import styled from 'styled-components';
+import { Settings as SettingsIcon } from 'lucide-react';
 
 const SettingsButton = styled.button<{ $visible: boolean }>`
   position: fixed;
@@ -13,10 +14,14 @@ const SettingsButton = styled.button<{ $visible: boolean }>`
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
+  padding: 0.75rem;
+  border-radius: 50%;
   cursor: pointer;
-  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
   z-index: 999;
   transition: all 0.3s ease;
   opacity: ${(props) => (props.$visible ? 1 : 0)};
@@ -25,6 +30,12 @@ const SettingsButton = styled.button<{ $visible: boolean }>`
   &:hover {
     background: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
   }
 `;
 
@@ -51,10 +62,10 @@ export default function Home() {
   });
   const [isSettingsOpen, setIsSettingsOpen] = React.useState(false);
   const { isFullscreen, toggleFullscreen } = useFullscreen();
-  const isUserActive = useUserActivity({ timeout: 3000, enabled: isFullscreen });
+  const isUserActive = useUserActivity({ timeout: 3000, enabled: true });
 
-  // Show buttons if not in fullscreen, or if in fullscreen and user is active
-  const showButtons = !isFullscreen || isUserActive;
+  // Always auto-hide buttons based on user activity
+  const showButtons = isUserActive;
 
   React.useEffect(() => {
     const loadedPreferences = loadPreferences();
@@ -71,8 +82,8 @@ export default function Home() {
       <ButtonContainer $visible={showButtons}>
         <FullscreenButton onClick={toggleFullscreen} isFullscreen={isFullscreen} />
       </ButtonContainer>
-      <SettingsButton $visible={showButtons} onClick={() => setIsSettingsOpen(true)}>
-        ⚙ Settings
+      <SettingsButton $visible={showButtons} onClick={() => setIsSettingsOpen(true)} aria-label="Settings">
+        <SettingsIcon />
       </SettingsButton>
       <ClockDisplay preferences={preferences} />
       <Settings

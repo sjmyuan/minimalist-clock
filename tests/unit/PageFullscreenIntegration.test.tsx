@@ -152,7 +152,7 @@ describe('Home page - Fullscreen integration', () => {
     render(<Home />);
     
     const fullscreenButton = screen.getByTestId('fullscreen-button');
-    const settingsButton = screen.getByText(/settings/i);
+    const settingsButton = screen.getByRole('button', { name: /settings/i });
     
     expect(fullscreenButton).toBeInTheDocument();
     expect(settingsButton).toBeInTheDocument();
@@ -165,7 +165,7 @@ describe('Home page - Fullscreen integration', () => {
     expect(screen.queryByTestId('settings')).not.toBeInTheDocument();
     
     // Open settings
-    const settingsButton = screen.getByText(/settings/i);
+    const settingsButton = screen.getByRole('button', { name: /settings/i });
     fireEvent.click(settingsButton);
     
     // Settings should be open

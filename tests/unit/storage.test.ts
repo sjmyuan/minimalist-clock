@@ -11,25 +11,25 @@ describe('storage utils', () => {
       const defaults = getDefaultPreferences();
       
       expect(defaults).toEqual({
-        fontSize: 48,
+        fontSize: 90,
         fontColor: '#FFFFFF',
-        backgroundColor: '#000000',
-        showSeconds: false,
-        flipStyle: 'drop-down',
-        fontFamily: 'Courier New, monospace',
-        fontWeight: 300,
+        backgroundColor: '#7f3d3d',
+        showSeconds: true,
+        flipStyle: 'card-fold',
+        fontFamily: 'Arial, sans-serif',
+        fontWeight: 400,
         use24HourFormat: true,
       });
     });
 
     it('should include fontFamily in defaults', () => {
       const defaults = getDefaultPreferences();
-      expect(defaults.fontFamily).toBe('Courier New, monospace');
+      expect(defaults.fontFamily).toBe('Arial, sans-serif');
     });
 
     it('should include fontWeight in defaults', () => {
       const defaults = getDefaultPreferences();
-      expect(defaults.fontWeight).toBe(300);
+      expect(defaults.fontWeight).toBe(400);
     });
   });
 
@@ -38,13 +38,13 @@ describe('storage utils', () => {
       const prefs = loadPreferences();
       
       expect(prefs).toEqual({
-        fontSize: 48,
+        fontSize: 90,
         fontColor: '#FFFFFF',
-        backgroundColor: '#000000',
-        showSeconds: false,
-        flipStyle: 'drop-down',
-        fontFamily: 'Courier New, monospace',
-        fontWeight: 300,
+        backgroundColor: '#7f3d3d',
+        showSeconds: true,
+        flipStyle: 'card-fold',
+        fontFamily: 'Arial, sans-serif',
+        fontWeight: 400,
         use24HourFormat: true,
       });
     });
@@ -167,13 +167,13 @@ describe('storage utils', () => {
       const reset = resetPreferences();
       
       expect(reset).toEqual({
-        fontSize: 48,
+        fontSize: 90,
         fontColor: '#FFFFFF',
-        backgroundColor: '#000000',
-        showSeconds: false,
-        flipStyle: 'drop-down',
-        fontFamily: 'Courier New, monospace',
-        fontWeight: 300,
+        backgroundColor: '#7f3d3d',
+        showSeconds: true,
+        flipStyle: 'card-fold',
+        fontFamily: 'Arial, sans-serif',
+        fontWeight: 400,
         use24HourFormat: true,
       });
       expect(localStorage.getItem('userPreferences')).toBeNull();
