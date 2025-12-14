@@ -1,4 +1,4 @@
-# Minimalist Clock
+# [Minimalist Clock](https://clock.shangjiaming.com/)
 
 A beautiful, minimalist clock web application with customizable appearance and smooth page-flip animations.
 
