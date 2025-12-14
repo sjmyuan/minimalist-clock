@@ -3,13 +3,13 @@ import { UserPreferences } from '@/src/types';
 const STORAGE_KEY = 'userPreferences';
 
 const defaultPreferences: UserPreferences = {
-  fontSize: 48, // Default font size within the 12-100px range
+  fontSize: 90, // Default font size within the 12-100px range
   fontColor: '#FFFFFF',
-  backgroundColor: '#000000',
-  showSeconds: false,
-  flipStyle: 'drop-down',
-  fontFamily: 'Courier New, monospace',
-  fontWeight: 300,
+  backgroundColor: '#7f3d3d',
+  showSeconds: true,
+  flipStyle: 'card-fold',
+  fontFamily: 'Arial, sans-serif',
+  fontWeight: 400,
   use24HourFormat: true,
 };
 

@@ -40,13 +40,13 @@ const ButtonContainer = styled.div<{ $visible: boolean }>`
 
 export default function Home() {
   const [preferences, setPreferences] = React.useState<UserPreferences>({
-    fontSize: 48,
+    fontSize: 90,
     fontColor: '#FFFFFF',
-    backgroundColor: '#000000',
-    showSeconds: false,
-    flipStyle: 'drop-down',
-    fontFamily: 'Courier New, monospace',
-    fontWeight: 300,
+    backgroundColor: '#7f3d3d',
+    showSeconds: true,
+    flipStyle: 'card-fold',
+    fontFamily: 'Arial, sans-serif',
+    fontWeight: 400,
     use24HourFormat: true,
   });
   const [isSettingsOpen, setIsSettingsOpen] = React.useState(false);
